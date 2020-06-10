@@ -35,6 +35,8 @@ namespace DeadFESHsMod.NPCs
             npc.value = Item.buyPrice(0, 0, 1, 50);
             npc.npcSlots = 0f;
             npc.netAlways = true;
+            banner = npc.type;
+            bannerItem = mod.ItemType("SpineShifterBanner");
         }
 
         public override bool PreAI()
@@ -291,7 +293,7 @@ namespace DeadFESHsMod.NPCs
         public override float SpawnChance(NPCSpawnInfo spawnInfo)
         {
             
-                return Main.tile[(spawnInfo.spawnTileX), (spawnInfo.spawnTileY)].type == TileID.Crimstone ? 0.00001f : 0f;
+                return Main.tile[(spawnInfo.spawnTileX), (spawnInfo.spawnTileY)].type == TileID.Crimstone ? 0.4f : 0f;
             
             
             
