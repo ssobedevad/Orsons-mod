@@ -4,7 +4,7 @@ using Terraria.ModLoader;
 using static Terraria.ModLoader.ModContent;
 using Terraria.ID;
 
-namespace DeadFESHsMod.Items.Placeables
+namespace OrsonsMod.Items.Placeables
 {
 	public class SpineShifterBanner : ModItem
 	{

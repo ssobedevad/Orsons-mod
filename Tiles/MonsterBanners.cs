@@ -8,7 +8,7 @@ using Terraria.ModLoader;
 using Terraria.ObjectData;
 using static Terraria.ModLoader.ModContent;
 
-namespace DeadFESHsMod.Tiles
+namespace OrsonsMod.Tiles
 {
 	public class MonsterBanners : ModTile
 	{
@@ -46,6 +46,9 @@ namespace DeadFESHsMod.Tiles
 				case 2:
 					item = "ScourgeCrawlerBanner";
 					break;
+				case 3:
+					item = "NeonProbeBanner";
+					break;
 				default:
 					return;
 			}
@@ -66,12 +69,14 @@ namespace DeadFESHsMod.Tiles
 						break;
 					case 1:
 						type = "SpineShifterHead";
-						player.NPCBannerBuff[mod.NPCType("SpineShifterBody")] = true;
-						player.NPCBannerBuff[mod.NPCType("SpineShifterTail")] = true;
+						
 						break;
 					case 2:
 						type = "ScourgeCrawler";
-						player.NPCBannerBuff[mod.NPCType("ScourgeCrawlerWall")] = true;
+						
+						break;
+					case 3:
+						type = "NeonProbe";
 						break;
 					default:
 						return;

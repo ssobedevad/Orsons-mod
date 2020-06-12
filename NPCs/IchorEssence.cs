@@ -5,7 +5,7 @@ using Terraria.Localization;
 using Microsoft.Xna.Framework;
 using System;
 
-namespace DeadFESHsMod.NPCs
+namespace OrsonsMod.NPCs
 {
     public class IchorEssence : ModNPC
     {
@@ -22,6 +22,7 @@ namespace DeadFESHsMod.NPCs
             npc.lifeMax = 250;
             npc.aiStyle = -1;
             npc.knockBackResist = 0.2f;
+            npc.HitSound = SoundID.NPCHit13;
             npc.behindTiles = true;
             npc.noTileCollide = true;
             for (int k = 0; k < npc.buffImmune.Length; k++)
@@ -60,7 +61,7 @@ namespace DeadFESHsMod.NPCs
         }
         public override void NPCLoot()
         {
-            Item.NewItem(npc.getRect(), ItemID.Ichor, Main.rand.Next(2, 3));
+            Item.NewItem(npc.getRect(), ItemID.Ichor, Main.rand.Next(2, 4));
         }
         
 

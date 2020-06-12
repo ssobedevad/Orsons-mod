@@ -36,11 +36,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\davedeboss04\\Documents\\My Games\\Terraria\\ModLoader\\Mod Sources\\DeadFESHsMod\\DeadFESHsMod.csproj",
-      "projectName": "DeadFESHsMod",
-      "projectPath": "C:\\Users\\davedeboss04\\Documents\\My Games\\Terraria\\ModLoader\\Mod Sources\\DeadFESHsMod\\DeadFESHsMod.csproj",
+      "projectUniqueName": "C:\\Users\\davedeboss04\\Documents\\My Games\\Terraria\\ModLoader\\Mod Sources\\OrsonsMod\\OrsonsMod.csproj",
+      "projectName": "OrsonsMod",
+      "projectPath": "C:\\Users\\davedeboss04\\Documents\\My Games\\Terraria\\ModLoader\\Mod Sources\\OrsonsMod\\OrsonsMod.csproj",
       "packagesPath": "C:\\Users\\davedeboss04\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\davedeboss04\\Documents\\My Games\\Terraria\\ModLoader\\Mod Sources\\DeadFESHsMod\\obj\\",
+      "outputPath": "C:\\Users\\davedeboss04\\Documents\\My Games\\Terraria\\ModLoader\\Mod Sources\\OrsonsMod\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\davedeboss04\\AppData\\Roaming\\NuGet\\NuGet.Config",

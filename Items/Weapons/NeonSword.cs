@@ -3,7 +3,7 @@ using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
 
-namespace DeadFESHsMod.Items.Weapons
+namespace OrsonsMod.Items.Weapons
 {
 	public class NeonSword : ModItem
 	{
@@ -44,7 +44,7 @@ namespace DeadFESHsMod.Items.Weapons
 		}
         public override void MeleeEffects(Player player, Rectangle hitbox)
         {
-			Lighting.AddLight((int)((player.Center.X + (float)(hitbox.Width / 2)) / 16f), (int)((player.Center.Y + (float)(hitbox.Height / 2)) / 16f),131 ,91,41 );
+			Lighting.AddLight((int)((player.Center.X + (float)(hitbox.Width / 2)) / 16f), (int)((player.Center.Y + (float)(hitbox.Height / 2)) / 16f), 1.5f, 1.5f, 1.5f);
 		}
     }
 }

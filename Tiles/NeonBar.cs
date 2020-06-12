@@ -5,7 +5,7 @@ using Terraria.ModLoader;
 using Terraria.ObjectData;
 using static Terraria.ModLoader.ModContent;
 
-namespace DeadFESHsMod.Tiles
+namespace OrsonsMod.Tiles
 {
 	public class NeonBar : ModTile
 	{

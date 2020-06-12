@@ -7,7 +7,7 @@ using Terraria;
 using Terraria.ModLoader;
 using Terraria.ID;
 
-namespace DeadFESHsMod.Items.Placeables
+namespace OrsonsMod.Items.Placeables
 {
     public class NeonBar : ModItem
     {
@@ -38,7 +38,7 @@ namespace DeadFESHsMod.Items.Placeables
         public override void AddRecipes()
         {
             ModRecipe recipe = new ModRecipe(mod);
-            recipe.AddIngredient(mod.ItemType("NeonOre"), 3);
+            recipe.AddIngredient(mod.ItemType("NeonScrap"), 3);
             recipe.AddTile(TileID.Furnaces);
             recipe.SetResult(this);
             recipe.AddRecipe();

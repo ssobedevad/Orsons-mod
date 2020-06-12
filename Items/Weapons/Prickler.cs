@@ -5,7 +5,7 @@ using Terraria.ID;
 using Terraria.ModLoader;
 using static Terraria.ModLoader.ModContent;
 
-namespace DeadFESHsMod.Items.Weapons
+namespace OrsonsMod.Items.Weapons
 {
 	public class Prickler : ModItem
 	{

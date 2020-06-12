@@ -2,7 +2,7 @@
 using Terraria.ID;
 using Terraria.ModLoader;
 
-namespace DeadFESHsMod.Projectiles.Friendly.Melee
+namespace OrsonsMod.Projectiles.Friendly.Melee
 {
 	public class Prickler : ModProjectile
 	{
@@ -42,9 +42,11 @@ namespace DeadFESHsMod.Projectiles.Friendly.Melee
         // Any AI method can be used for dust, spawning projectiles, etc specific to your yoyo.
         public override void ModifyHitNPC(NPC target, ref int damage, ref float knockback, ref bool crit, ref int hitDirection)
         {
-
-			target.defense -= 2;
-			damage += 2;
+			NPC targetClone = (NPC)target.Clone();
+			targetClone.SetDefaults(targetClone.type);
+			target.defense = targetClone.defense - 2;
+			
+			
 
 
 		}

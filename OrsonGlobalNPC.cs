@@ -12,7 +12,7 @@ using Terraria.DataStructures;
 using Terraria.Localization;
 using System;
 
-namespace DeadFESHsMod
+namespace OrsonsMod
 {
 
     class DFMGlobalNPC : GlobalNPC

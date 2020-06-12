@@ -6,7 +6,7 @@ using Terraria.ID;
 using Terraria.ModLoader;
 using Terraria.Localization;
 
-namespace DeadFESHsMod.NPCs
+namespace OrsonsMod.NPCs
 {
     public class SpineShifterBody : ModNPC
     {
@@ -29,7 +29,7 @@ namespace DeadFESHsMod.NPCs
             npc.netAlways = true;
             npc.noGravity = true;
             npc.dontCountMe = true;
-
+            banner = mod.NPCType("SpineShifterHead");
         }
 
         public override bool PreAI()

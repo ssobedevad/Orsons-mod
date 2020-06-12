@@ -5,7 +5,7 @@ using Terraria.Localization;
 using Microsoft.Xna.Framework;
 using System;
 
-namespace DeadFESHsMod.NPCs
+namespace OrsonsMod.NPCs
 {
     public class ScourgeCrawlerWall : ModNPC
     {
@@ -30,6 +30,7 @@ namespace DeadFESHsMod.NPCs
             npc.buffImmune[BuffID.Venom] = true;
             Main.npcFrameCount[npc.type] = 4;
             npc.noGravity = true;
+            npc.HitSound = SoundID.NPCHit29;
             banner = mod.NPCType("ScourgeCrawler");
             bannerItem = mod.ItemType("ScourgeCrawlerBanner");
 
