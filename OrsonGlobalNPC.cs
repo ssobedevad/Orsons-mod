@@ -23,11 +23,19 @@ namespace OrsonsMod
         public override void NPCLoot(NPC npc)
         {
             // We check several things that filter out bosses and critters, as well as the depth that the npc died at. 
-            if ( npc.Center.Y > Main.rockLayer * 16 && Main.rand.Next(0, 15) == 0)
+            if ( npc.Center.Y > Main.rockLayer && Main.rand.Next(0, 15) == 0 && Main.hardMode)
             {
-                if (Main.player[Player.FindClosest(npc.position, npc.width, npc.height)].ZoneCrimson)
+                Player ClosestPlayer = Main.player[Player.FindClosest(npc.position, npc.width, npc.height)];
+                if(ClosestPlayer.ZoneRockLayerHeight)
+                { 
+                if (ClosestPlayer.ZoneCrimson)
                 {
                     NPC.NewNPC((int)npc.Center.X, (int)npc.Center.Y, mod.NPCType("IchorEssence"));
+                }
+                    if (ClosestPlayer.ZoneCorrupt)
+                    {
+                        NPC.NewNPC((int)npc.Center.X, (int)npc.Center.Y, mod.NPCType("CursedEssence"));
+                    }
                 }
             }
             

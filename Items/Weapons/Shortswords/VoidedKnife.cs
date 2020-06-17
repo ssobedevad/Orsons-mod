@@ -11,7 +11,7 @@ namespace OrsonsMod.Items.Weapons.Shortswords
         public override void SetStaticDefaults()
         {
 
-            Tooltip.SetDefault("No real reason to make this over any other weapon");
+            Tooltip.SetDefault("A knife that's voided"+"\nHow strange??");
         }
 
         public override void SetDefaults()

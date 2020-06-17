@@ -3,7 +3,7 @@ using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
 
-namespace OrsonsMod.Items.Weapons
+namespace OrsonsMod.Items.Weapons.Swords
 {
 	public class NeonSword : ModItem
 	{

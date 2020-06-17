@@ -10,7 +10,7 @@ namespace OrsonsMod.Items.Weapons.Shortswords
         public override void SetStaticDefaults()
         {
 
-            Tooltip.SetDefault("No real reason to make this over any other weapon");
+            Tooltip.SetDefault("This is also made out of Fire!");
         }
 
         public override void SetDefaults()
@@ -30,11 +30,17 @@ namespace OrsonsMod.Items.Weapons.Shortswords
             item.UseSound = SoundID.Item1;
             item.autoReuse = false;
         }
-
+        public override void OnHitNPC(Player player, NPC target, int damage, float knockBack, bool crit)
+        {
+            if (Main.rand.Next(0, 2) == 1)
+            {
+                target.AddBuff(BuffID.OnFire, 240);
+            }
+        }
         public override void AddRecipes()
         {
             ModRecipe recipe = new ModRecipe(mod);
-            recipe.AddIngredient(ItemID.DemoniteBar, 8);
+            recipe.AddIngredient(ItemID.HellstoneBar, 12);
 
             recipe.AddTile(TileID.Anvils);
             recipe.SetResult(this);

@@ -68,7 +68,7 @@ namespace OrsonsMod.NPCs
         public override float SpawnChance(NPCSpawnInfo spawnInfo)
         {
 
-            return spawnInfo.player.ZoneSkyHeight && !Main.dayTime ? 0.8f : 0f;
+            return spawnInfo.player.ZoneSkyHeight? 0.8f : 0f;
 
 
 

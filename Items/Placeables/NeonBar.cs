@@ -23,7 +23,7 @@ namespace OrsonsMod.Items.Placeables
             item.width = 30;
             item.height = 24;
             item.maxStack = 99;
-            item.rare = 13;
+            item.rare = ItemRarityID.Orange;
             item.value = 10000;
             item.useStyle = ItemUseStyleID.SwingThrow;
             item.useTurn = true;
@@ -33,7 +33,7 @@ namespace OrsonsMod.Items.Placeables
             item.consumable = true;
             item.createTile = mod.TileType("NeonBar");
             item.placeStyle = 0;
-
+            
         }
         public override void AddRecipes()
         {
@@ -43,5 +43,6 @@ namespace OrsonsMod.Items.Placeables
             recipe.SetResult(this);
             recipe.AddRecipe();
         }
+        
     }
 }

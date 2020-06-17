@@ -10,18 +10,18 @@ namespace OrsonsMod.Items.Weapons.Shortswords
         public override void SetStaticDefaults()
         {
 
-            Tooltip.SetDefault("No real reason to make this over any other weapon");
+            Tooltip.SetDefault("The worlds evils combined");
         }
 
         public override void SetDefaults()
         {
             item.damage = 38;
             item.melee = true;
-            item.width = 36;
-            item.height = 38;
-            item.useTime = 24;
+            item.width = 40;
+            item.height = 40;
+            item.useTime = 22;
             item.useTurn = true;
-            item.useAnimation = 24;
+            item.useAnimation = 22;
             item.useStyle = ItemUseStyleID.Stabbing;
             item.knockBack = 4;
             item.value = 38000;
@@ -37,6 +37,7 @@ namespace OrsonsMod.Items.Weapons.Shortswords
             recipe.AddIngredient(mod.ItemType("VoidedKnife"));
             recipe.AddIngredient(mod.ItemType("FieryLongDagger"));
             recipe.AddIngredient(mod.ItemType("ThreadOfGrass"));
+            recipe.AddIngredient(mod.ItemType("MuraMini"));
             recipe.AddTile(TileID.DemonAltar);
             recipe.SetResult(this);
             recipe.AddRecipe();
@@ -44,6 +45,7 @@ namespace OrsonsMod.Items.Weapons.Shortswords
             recipe.AddIngredient(mod.ItemType("Puree"));
             recipe.AddIngredient(mod.ItemType("FieryLongDagger"));
             recipe.AddIngredient(mod.ItemType("ThreadOfGrass"));
+            recipe.AddIngredient(mod.ItemType("MuraMini"));
             recipe.AddTile(TileID.DemonAltar);
             recipe.SetResult(this);
             recipe.AddRecipe();

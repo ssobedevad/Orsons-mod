@@ -5,27 +5,23 @@ using Terraria.ModLoader;
 
 namespace OrsonsMod.Items.Weapons.Shortswords
 {
-    public class TrueNightsNeedle : ModItem
+    public class OrichalcumShortsword : ModItem
     {
-        public override void SetStaticDefaults()
-        {
 
-            Tooltip.SetDefault("No real reason to make this over any other weapon");
-        }
 
         public override void SetDefaults()
         {
-            item.damage = 16;
+            item.damage = 46;
             item.melee = true;
-            item.width = 38;
-            item.height = 46;
-            item.useTime = 10;
+            item.width = 32;
+            item.height = 32;
+            item.useTime = 22;
             item.useTurn = true;
-            item.useAnimation = 10;
+            item.useAnimation = 22;
             item.useStyle = ItemUseStyleID.Stabbing;
-            item.knockBack = 5;
-            item.value = 2000;
-            item.rare = ItemRarityID.Blue;
+            item.knockBack = 5.2f;
+            item.value = 24300;
+            item.rare = ItemRarityID.LightRed;
             //item.crit = 2;
             item.UseSound = SoundID.Item1;
             item.autoReuse = false;
@@ -34,8 +30,7 @@ namespace OrsonsMod.Items.Weapons.Shortswords
         public override void AddRecipes()
         {
             ModRecipe recipe = new ModRecipe(mod);
-            recipe.AddIngredient(ItemID.BrokenHeroSword);
-            recipe.AddIngredient(mod.ItemType("NightsNeedle"));
+            recipe.AddIngredient(ItemID.OrichalcumBar, 10);
 
             recipe.AddTile(TileID.MythrilAnvil);
             recipe.SetResult(this);

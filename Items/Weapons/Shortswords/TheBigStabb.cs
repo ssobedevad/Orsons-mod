@@ -10,38 +10,28 @@ namespace OrsonsMod.Items.Weapons.Shortswords
         public override void SetStaticDefaults()
         {
 
-            Tooltip.SetDefault("No real reason to make this over any other weapon");
+            Tooltip.SetDefault("Absolutely huge");
         }
 
         public override void SetDefaults()
         {
-            item.damage = 16;
+            item.damage = 39;
             item.melee = true;
-            item.width = 46;
-            item.height = 56;
-            item.useTime = 10;
+            item.width =42;
+            item.height = 42;
+            item.useTime = 32;
             item.useTurn = true;
-            item.useAnimation = 10;
+            item.useAnimation = 32;
             item.useStyle = ItemUseStyleID.Stabbing;
-            item.knockBack = 5;
-            item.value = 2000;
-            item.rare = ItemRarityID.Blue;
-            //item.crit = 2;
+            item.knockBack = 10;
+            item.value = 30000;
+            item.rare = ItemRarityID.LightRed;
+            item.crit = 2;
             item.UseSound = SoundID.Item1;
             item.autoReuse = false;
         }
 
-        public override void AddRecipes()
-        {
-            ModRecipe recipe = new ModRecipe(mod);
-            recipe.AddIngredient(ItemID.DemoniteBar, 8);
-
-            recipe.AddTile(TileID.Anvils);
-            recipe.SetResult(this);
-            recipe.AddRecipe();
-
-
-        }
+        
 
 
     }

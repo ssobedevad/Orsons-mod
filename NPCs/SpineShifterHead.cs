@@ -29,7 +29,7 @@ namespace OrsonsMod.NPCs
             npc.lavaImmune = true;       //this make the npc immune to lava
             npc.noGravity = true;           //this make the npc float
             npc.noTileCollide = true;        //this make the npc go through walls
-            npc.HitSound = SoundID.NPCHit57;
+            npc.HitSound = SoundID.NPCHit1;
             npc.behindTiles = true;
             
             npc.value = Item.buyPrice(0, 0, 1, 50);

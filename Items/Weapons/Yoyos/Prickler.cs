@@ -5,7 +5,7 @@ using Terraria.ID;
 using Terraria.ModLoader;
 using static Terraria.ModLoader.ModContent;
 
-namespace OrsonsMod.Items.Weapons
+namespace OrsonsMod.Items.Weapons.Yoyos
 {
 	public class Prickler : ModItem
 	{
@@ -36,7 +36,7 @@ namespace OrsonsMod.Items.Weapons
 			item.noUseGraphic = true;
 
 			item.UseSound = SoundID.Item1;
-			item.value = Item.sellPrice(silver: 1);
+			item.value = 1000;
 			item.shoot = mod.ProjectileType("Prickler");
 		}
 

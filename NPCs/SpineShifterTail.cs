@@ -30,6 +30,7 @@ namespace OrsonsMod.NPCs
             npc.noGravity = true;
             npc.dontCountMe = true;
             banner = mod.NPCType("SpineShifterHead");
+            npc.HitSound = SoundID.NPCHit1;
         }
 
         public override bool PreAI()

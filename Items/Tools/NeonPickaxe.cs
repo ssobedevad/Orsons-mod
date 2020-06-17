@@ -45,6 +45,10 @@ namespace OrsonsMod.Items.Tools
         {
             Lighting.AddLight((int)((player.Center.X + (float)(hitbox.Width / 2)) / 16f), (int)((player.Center.Y + (float)(hitbox.Height / 2)) / 16f), 1.5f, 1.5f, 1.5f);
         }
+        public override void UpdateInventory(Player player)
+        {
+            if (player.HeldItem == this.item || Main.mouseItem == this.item) { player.pickSpeed -= 2; }
+        }
 
     }
 }

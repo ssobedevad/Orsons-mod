@@ -49,6 +49,15 @@ namespace OrsonsMod.Tiles
 				case 3:
 					item = "NeonProbeBanner";
 					break;
+				case 4:
+					item = "RottedWandererBanner";
+					break;
+				case 5:
+					item = "CursedEssenceBanner";
+					break;
+				case 6:
+					item = "FoamyZombiebanner";
+					break;
 				default:
 					return;
 			}
@@ -77,6 +86,15 @@ namespace OrsonsMod.Tiles
 						break;
 					case 3:
 						type = "NeonProbe";
+						break;
+					case 4:
+						type = "RottedWanderer";
+						break;
+					case 5:
+						type = "CursedEssence";
+						break;
+					case 6:
+						type = "FoamyZombie";
 						break;
 					default:
 						return;

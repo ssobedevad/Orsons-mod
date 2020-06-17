@@ -2,7 +2,7 @@
 using Terraria.ID;
 using Terraria.ModLoader;
 
-namespace OrsonsMod.Projectiles.Friendly.Melee
+namespace OrsonsMod.Projectiles.Friendly.Melee.Yoyos
 {
 	public class Prickler : ModProjectile
 	{
@@ -17,7 +17,7 @@ namespace OrsonsMod.Projectiles.Friendly.Melee
 			ProjectileID.Sets.YoyosMaximumRange[projectile.type] = 143f;
 			// YoyosTopSpeed is top speed of the yoyo projectile. 
 			// Vanilla values range from 9f(Wood) to 17.5f(Terrarian), and defaults to 10f
-			ProjectileID.Sets.YoyosTopSpeed[projectile.type] = 16f;
+			ProjectileID.Sets.YoyosTopSpeed[projectile.type] = 10f;
 		}
 
 		public override void SetDefaults()
@@ -40,17 +40,11 @@ namespace OrsonsMod.Projectiles.Friendly.Melee
         // ai[0] is -1f once YoyosLifeTimeMultiplier is reached, when the player is stoned/frozen, when the yoyo is too far away, or the player is no longer clicking the shoot button.
         // ai[0] being negative makes the yoyo move back towards the player
         // Any AI method can be used for dust, spawning projectiles, etc specific to your yoyo.
-        public override void ModifyHitNPC(NPC target, ref int damage, ref float knockback, ref bool crit, ref int hitDirection)
+        public override void AI()
         {
-			NPC targetClone = (NPC)target.Clone();
-			targetClone.SetDefaults(targetClone.type);
-			target.defense = targetClone.defense - 2;
-			
-			
+			Main.player[projectile.owner].armorPenetration += 2;
+        }
 
-
-		}
-    
 
     }
 }
