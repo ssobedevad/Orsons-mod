@@ -31,10 +31,22 @@ namespace OrsonsMod.Buffs.Debuffs
         {
             player.velocity *= 0.85f;
             player.allDamage *= 0.75f;
-            player.potionDelayTime = player.buffTime[buffIndex];
+            player.potionDelay = player.buffTime[buffIndex];
 
 
             int Dustid = Dust.NewDust(new Vector2(player.position.X, player.position.Y + 2f), player.width + 1, player.height + 1, DustID.Marble, player.velocity.X * 0.2f, player.velocity.Y * 0.2f, 120, default(Color), 2f);
+            Main.dust[Dustid].noGravity = true;
+
+
+
+
+        }
+        public override void Update(NPC npc, ref int buffIndex)
+        {
+            npc.velocity *= 0.85f;
+            
+
+            int Dustid = Dust.NewDust(new Vector2(npc.position.X, npc.position.Y + 2f), npc.width + 1, npc.height + 1, DustID.Marble, npc.velocity.X * 0.2f, npc.velocity.Y * 0.2f, 120, default(Color), 2f);
             Main.dust[Dustid].noGravity = true;
 
 

@@ -28,7 +28,7 @@ namespace OrsonsMod.Items.Weapons.Shortswords
             item.rare = ItemRarityID.Yellow;
             //item.crit = 2;
             item.UseSound = SoundID.Item1;
-            item.autoReuse = false;
+            item.autoReuse = true;
             item.shoot = mod.ProjectileType("TerriBeam");
             item.shootSpeed = 12f;
         }

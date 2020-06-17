@@ -32,7 +32,7 @@ namespace OrsonsMod.NPCs
         public override float SpawnChance(NPCSpawnInfo spawnInfo)
         {
 
-            return (!Main.dayTime) ? 0.4f : 0f;
+            return (!Main.dayTime) ? 0.2f : 0f;
 
 
 

@@ -38,9 +38,10 @@ namespace OrsonsMod.Items.Placeables
         public override void AddRecipes()
         {
             ModRecipe recipe = new ModRecipe(mod);
-            recipe.AddIngredient(mod.ItemType("NeonScrap"), 3);
+            recipe.AddIngredient(mod.ItemType("NeonScrap"), 2);
+            recipe.AddIngredient(ItemID.MeteoriteBar);
             recipe.AddTile(TileID.Furnaces);
-            recipe.SetResult(this);
+            recipe.SetResult(this,2);
             recipe.AddRecipe();
         }
         
