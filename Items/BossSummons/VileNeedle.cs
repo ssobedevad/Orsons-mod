@@ -49,7 +49,7 @@ namespace OrsonsMod.Items.BossSummons
         public override void AddRecipes()
         {
             ModRecipe recipe = new ModRecipe(mod);
-            recipe.AddIngredient(ModContent.ItemType<RabbidFoam>(), 10);
+            recipe.AddIngredient(ModContent.ItemType<RabidFoam>(), 10);
             recipe.AddRecipeGroup("T3PHmB");
             recipe.AddTile(TileID.Anvils);
             recipe.SetResult(this);

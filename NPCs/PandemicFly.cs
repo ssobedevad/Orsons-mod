@@ -22,30 +22,34 @@ namespace OrsonsMod.NPCs
             npc.aiStyle = -1;
             npc.knockBackResist = 0f;
             npc.HitSound = SoundID.NPCHit1;
+            npc.DeathSound = SoundID.NPCDeath1;
             Main.npcFrameCount[npc.type] = 4;
             npc.noGravity = true;
             animationType = NPCID.Bee;
+            npc.noTileCollide = true;
             
 
         }
         public override void ScaleExpertStats(int numPlayers, float bossLifeScale)
         {
-            npc.lifeMax *= 2;
-            npc.damage *= 2;
+            npc.lifeMax = 14;
+            npc.defense = 0;
+            npc.damage = 10;
         }
+
         public override void AI()
         {
             npc.TargetClosest(true);
-            float speed = (Main.rand.Next(1,160)/10f);
-            Vector2 moveTo = Main.player[npc.target].Center;
-            Vector2 moveVel = (moveTo - npc.Center);
-            float magnitude = Magnitude(moveVel);
-            if (magnitude > speed)
-            {
-                moveVel *= speed / magnitude;
-
-                npc.velocity = moveVel;
-            }
+            Vector2 ThisCenter = new Vector2(npc.Center.X, npc.Center.Y);
+            float Xdiff = Main.player[npc.target].Center.X - ThisCenter.X + Main.rand.Next(-100, 100);
+            float YDiff = Main.player[npc.target].Center.Y - ThisCenter.Y - Main.rand.Next(-100, 100);
+            float Magnitude = (float)Math.Sqrt((double)(Xdiff * Xdiff + YDiff * YDiff));
+            float Speed = 16f;
+            Magnitude = Speed / Magnitude;
+            Xdiff *= Magnitude;
+            YDiff *= Magnitude;
+            npc.velocity.X = (npc.velocity.X * 80f + Xdiff) / 81f;
+            npc.velocity.Y = (npc.velocity.Y * 80f + YDiff) / 81f;
         }
         public override void OnHitPlayer(Player target, int damage, bool crit)
         {

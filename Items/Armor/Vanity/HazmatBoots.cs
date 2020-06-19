@@ -5,15 +5,15 @@ using Terraria.ModLoader;
 
 
 
-namespace OrsonsMod.Items.Armor
+namespace OrsonsMod.Items.Armor.Vanity
 {
-    [AutoloadEquip(EquipType.Body)]
-    public class HazmatBody : ModItem
+    [AutoloadEquip(EquipType.Legs)]
+    public class HazmatBoots : ModItem
     {
         public override void SetStaticDefaults()
         {
             base.SetStaticDefaults();
-            DisplayName.SetDefault("Hasmat body");
+            DisplayName.SetDefault("Hazmat boots");
             Tooltip.SetDefault("COVID-19 free");
         }
 

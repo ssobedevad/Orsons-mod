@@ -1,21 +1,26 @@
-﻿using Terraria;
+﻿using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Graphics;
+using OrsonsMod.Buffs.Debuffs;
+using OrsonsMod.Items.Armor;
+using OrsonsMod.Items.Armor.Vanity;
+using OrsonsMod.Items.Placeables;
+using OrsonsMod.Items.TreasureBags;
+using OrsonsMod.Items.Weapons.Magic;
+using OrsonsMod.Items.Weapons.Repeaters;
+using OrsonsMod.Items.Weapons.Summon;
+using OrsonsMod.Items.Weapons.Swords;
+using OrsonsMod.Projectiles.Hostile;
+using System;
+using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
-using Terraria.Localization;
-using Microsoft.Xna.Framework;
-using System;
-using OrsonsMod.Buffs.Debuffs;
-using OrsonsMod.Projectiles.Hostile;
-using OrsonsMod.Items.Weapons.Swords;
-using Steamworks;
-using Microsoft.Xna.Framework.Graphics;
 
 namespace OrsonsMod.NPCs.Boss
 {
     public class DrPandemic : ModNPC
     {
 
-        private int dashDamage = Main.expertMode?60 : 40;
+        private int dashDamage = Main.expertMode ? 60 : 40;
         private int contactDamage = Main.expertMode ? 30 : 15;
         private int spitDamage = Main.expertMode ? 25 : 12;
         private int phaseCounter = 0;
@@ -31,6 +36,7 @@ namespace OrsonsMod.NPCs.Boss
             npc.aiStyle = -1;
             npc.knockBackResist = 0f;
             npc.HitSound = SoundID.NPCHit1;
+            npc.DeathSound = SoundID.NPCDeath5;
             npc.behindTiles = true;
             npc.noTileCollide = true;
             npc.boss = true;
@@ -43,36 +49,43 @@ namespace OrsonsMod.NPCs.Boss
             npc.ai[1] = 0;
             npc.ai[2] = 0;
         }
+        public override void ScaleExpertStats(int numPlayers, float bossLifeScale)
+        {
+            npc.lifeMax = 7000;
+            npc.defense = 26;
+        }
         public override void AI()
         {
 
             npc.TargetClosest(true);
 
-            
+
             if (npc.ai[1] == 0)
             {
                 FloatAbovePlayer();
-                if (npc.ai[0] % 60 == 0) { Projectile.NewProjectile(npc.Center, ShootAtPlayer(16f , Main.player[npc.target]), ModContent.ProjectileType<RabidSpit>(), spitDamage, 0f, Main.myPlayer); }
+                if (npc.ai[0] % 60 == 0) { Projectile.NewProjectile(npc.Center, ShootAtPlayer(16f, Main.player[npc.target]), ModContent.ProjectileType<RabidSpit>(), spitDamage, 0f, Main.myPlayer); }
                 npc.ai[0] += 1;
                 if (npc.ai[0] > 420) { npc.ai[1] = 1; npc.ai[0] = 0; }
+                for (int i = 0; i < Main.rand.Next(2, 5); i++) { NPC.NewNPC((int)npc.Center.X + Main.rand.Next(-100, 100), (int)npc.Center.Y + Main.rand.Next(-100, 100), ModContent.NPCType<PandemicFly>()); }
 
             }
             else if (npc.ai[1] == 1)
             {
+                for (int i = 0; i < Main.rand.Next(2, 5); i++) { NPC.NewNPC((int)npc.Center.X + Main.rand.Next(-100, 100), (int)npc.Center.Y + Main.rand.Next(-100, 100), ModContent.NPCType<PandemicFly>()); }
                 npc.ai[0] += 1;
-                if (npc.ai[0] < 120) { DashToLeftSideOfPlayer();  if(npc.ai[0] % 40 == 0) { Projectile.NewProjectile(npc.Center, ShootAtPlayer(16f, Main.player[npc.target]), ModContent.ProjectileType<RabidSpit>(), spitDamage, 0f, Main.myPlayer); } }
-                else if (npc.ai[0] < 240) { FloatAbovePlayer(); if (npc.ai[0] % 40 == 0) { Projectile.NewProjectile(npc.Center, ShootAtPlayer(16f, Main.player[npc.target]), ModContent.ProjectileType<RabidSpit>(), spitDamage, 0f, Main.myPlayer); } }
+                if (npc.ai[0] < 120) { DashToLeftSideOfPlayer(); if (npc.ai[0] % 40 == 0) { Projectile.NewProjectile(npc.Center, ShootAtPlayer(16f, Main.player[npc.target]), ModContent.ProjectileType<RabidSpit>(), spitDamage, 0f, Main.myPlayer); } }
+                else if (npc.ai[0] < 240) { FloatAbovePlayer(); if (npc.ai[0] % 40 == 0) { for (int i = 0; i < Main.rand.Next(2, 5); i++) { NPC.NewNPC((int)npc.Center.X + Main.rand.Next(-100, 100), (int)npc.Center.Y + Main.rand.Next(-100, 100), ModContent.NPCType<PandemicFly>()); } Projectile.NewProjectile(npc.Center, ShootAtPlayer(16f, Main.player[npc.target]), ModContent.ProjectileType<RabidSpit>(), spitDamage, 0f, Main.myPlayer); } }
                 else if (npc.ai[0] < 360) { DashToRightSideOfPlayer(); if (npc.ai[0] % 40 == 0) { Projectile.NewProjectile(npc.Center, ShootAtPlayer(16f, Main.player[npc.target]), ModContent.ProjectileType<RabidSpit>(), spitDamage, 0f, Main.myPlayer); } }
                 else if (npc.ai[0] < 480) { FloatAbovePlayer(); if (npc.ai[0] % 40 == 0) { Projectile.NewProjectile(npc.Center, ShootAtPlayer(16f, Main.player[npc.target]), ModContent.ProjectileType<RabidSpit>(), spitDamage, 0f, Main.myPlayer); } }
                 if (phaseCounter <= 3 && npc.ai[0] >= 480) { npc.ai[0] = 0; phaseCounter += 1; }
-                if (phaseCounter >= 4){ npc.ai[0] = 0; phaseCounter = 0; npc.ai[1] = 0; for (int i = 0; i < 15; i++) { NPC.NewNPC((int)npc.Center.X, (int)npc.Center.Y, ModContent.NPCType<PandemicFly>()); } }
-                
+                if (phaseCounter >= 4) { npc.ai[0] = 0; phaseCounter = 0; npc.ai[1] = 0; for (int i = 0; i < Main.rand.Next(2, 5); i++) { NPC.NewNPC((int)npc.Center.X + Main.rand.Next(-100, 100), (int)npc.Center.Y + Main.rand.Next(-100, 100), ModContent.NPCType<PandemicFly>()); } }
+
             }
 
 
 
 
-                npc.rotation = npc.velocity.X / 15f;
+            npc.rotation = npc.velocity.X / 15f;
             int Dustid = Dust.NewDust(new Vector2(npc.position.X + (float)(npc.width / 2) - 15f - npc.velocity.X * 5f, npc.position.Y + (float)npc.height - 2f), 30, 10, DustID.Marble, -npc.velocity.X * 0.2f, 3f, 0, default(Color), 2f);
             Main.dust[Dustid].noGravity = true;
             Dust dust = Main.dust[Dustid];
@@ -81,7 +94,7 @@ namespace OrsonsMod.NPCs.Boss
             dust2.velocity.X = dust2.velocity.X + npc.velocity.X * 0.4f;
             Dust dust3 = Main.dust[Dustid];
             dust3.velocity.Y = dust3.velocity.Y + (2f + npc.velocity.Y);
-            
+
 
         }
         private void FloatAbovePlayer()
@@ -103,7 +116,7 @@ namespace OrsonsMod.NPCs.Boss
             npc.damage = dashDamage;
             Vector2 ThisCenter = new Vector2(npc.Center.X, npc.Center.Y);
             float Xdiff = Main.player[npc.target].Center.X - ThisCenter.X - 300;
-            float YDiff = Main.player[npc.target].Center.Y - ThisCenter.Y-300;
+            float YDiff = Main.player[npc.target].Center.Y - ThisCenter.Y - 300;
             float Magnitude = (float)Math.Sqrt((double)(Xdiff * Xdiff + YDiff * YDiff));
             float Speed = 40f;
             Magnitude = Speed / Magnitude;
@@ -117,7 +130,7 @@ namespace OrsonsMod.NPCs.Boss
             npc.damage = dashDamage;
             Vector2 ThisCenter = new Vector2(npc.Center.X, npc.Center.Y);
             float Xdiff = Main.player[npc.target].Center.X - ThisCenter.X + 300;
-            float YDiff = Main.player[npc.target].Center.Y - ThisCenter.Y-300;
+            float YDiff = Main.player[npc.target].Center.Y - ThisCenter.Y - 300;
             float Magnitude = (float)Math.Sqrt((double)(Xdiff * Xdiff + YDiff * YDiff));
             float Speed = 40f;
             Magnitude = Speed / Magnitude;
@@ -132,14 +145,48 @@ namespace OrsonsMod.NPCs.Boss
         }
         public override void NPCLoot()
         {
-            
-            if (Main.rand.Next(4) == 1)
+            if (Main.expertMode)
+            { Item.NewItem(npc.getRect(), ModContent.ItemType<DrPandemicBag>()); }
+            else
             {
-                Item.NewItem(npc.getRect(), ModContent.ItemType<NeedleBrand>());
+                switch (Main.rand.Next(5))
+                {
+                    case 1:
+                        {
+                            Item.NewItem(npc.getRect(), ModContent.ItemType<NeedleBrand>());
+                            Item.NewItem(npc.getRect(), ModContent.ItemType<HazmatHelmet>());
+                            break;
+                        }
+                    case 2:
+                        {
+                            Item.NewItem(npc.getRect(), ModContent.ItemType<SwarmFlyStaff>());
+                            Item.NewItem(npc.getRect(), ModContent.ItemType<HazmatBoots>());
+                            break;
+                        }
+                    case 3:
+                        {
+                            Item.NewItem(npc.getRect(), ModContent.ItemType<RabidRepeater>());
+                            Item.NewItem(npc.getRect(), ModContent.ItemType<HazmatHelmet>());
+                            break;
+                        }
+                    case 4:
+                        {
+                            Item.NewItem(npc.getRect(), ModContent.ItemType<FoamBarrier>());
+                            Item.NewItem(npc.getRect(), ModContent.ItemType<HazmatBody>());
+                            break;
+                        }
+                }
+                
             }
-            
-        }
-        private Vector2 ShootAtPlayer(float moveSpeed , Player player)
+            if (Main.rand.Next(7) == 1)
+            {
+                Item.NewItem(npc.getRect(), ModContent.ItemType<DrPandemicTrophy>());
+            }
+
+
+
+            }
+        private Vector2 ShootAtPlayer(float moveSpeed, Player player)
         {
             // Sets the max speed of the npc.
             Vector2 moveTo2 = player.Top - npc.Bottom;

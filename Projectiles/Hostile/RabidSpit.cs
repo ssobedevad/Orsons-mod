@@ -33,7 +33,7 @@ namespace OrsonsMod.Projectiles.Hostile
         }
         public override void OnHitPlayer(Player target, int damage, bool crit)
         {
-            target.AddBuff(mod.BuffType("Diseased"), 240);
+            target.AddBuff(mod.BuffType("Diseased"), 60);
 
         }
 

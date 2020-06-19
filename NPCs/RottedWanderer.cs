@@ -22,6 +22,7 @@ namespace OrsonsMod.NPCs
             npc.aiStyle = 3;
             npc.knockBackResist = 0.45f;
             npc.HitSound = SoundID.NPCHit13;
+            npc.DeathSound = SoundID.NPCDeath5;
             Main.npcFrameCount[npc.type] = 16;
             npc.buffImmune[BuffID.Poisoned] = true;
             npc.buffImmune[BuffID.Venom] = true;

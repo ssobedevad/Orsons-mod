@@ -30,6 +30,7 @@ namespace OrsonsMod.NPCs
             npc.noGravity = true;           //this make the npc float
             npc.noTileCollide = true;        //this make the npc go through walls
             npc.HitSound = SoundID.NPCHit1;
+            npc.DeathSound = SoundID.NPCDeath1;
             npc.behindTiles = true;
             
             npc.value = Item.buyPrice(0, 0, 1, 50);

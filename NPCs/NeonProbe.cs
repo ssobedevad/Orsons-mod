@@ -24,6 +24,7 @@ namespace OrsonsMod.NPCs
             npc.aiStyle = -1;
             npc.knockBackResist = 0.4f;
             npc.HitSound = SoundID.NPCHit4;
+            npc.DeathSound = SoundID.NPCDeath14;
             npc.noTileCollide = true;
 
 

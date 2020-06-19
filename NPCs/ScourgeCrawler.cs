@@ -27,6 +27,7 @@ namespace OrsonsMod.NPCs
             npc.buffImmune[BuffID.Confused] = true;
             npc.buffImmune[BuffID.Venom] = true;
             npc.HitSound = SoundID.NPCHit29;
+            npc.DeathSound = SoundID.NPCDeath12;
 
             banner = npc.type;
             bannerItem = mod.ItemType("ScourgeCrawlerBanner");

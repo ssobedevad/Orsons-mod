@@ -23,6 +23,7 @@ namespace OrsonsMod.NPCs
             npc.aiStyle = -1;
             npc.knockBackResist = 0.2f;
             npc.HitSound = SoundID.NPCHit13;
+            npc.DeathSound = SoundID.NPCDeath39;
             npc.behindTiles = true;
             npc.noTileCollide = true;
             for (int k = 0; k < npc.buffImmune.Length; k++)

@@ -1,11 +1,10 @@
 ﻿using Microsoft.Xna.Framework;
+using OrsonsMod.Buffs.Buffs;
+using OrsonsMod.Buffs.Debuffs;
 using System;
-using System.Collections.Generic;
-using System.Security.Cryptography.X509Certificates;
+using System.Linq;
 using Terraria;
 using Terraria.DataStructures;
-using Terraria.Enums;
-using Terraria.GameContent.Achievements;
 using Terraria.ID;
 using Terraria.ModLoader;
 
@@ -19,16 +18,21 @@ namespace OrsonsMod
         public float miningSpeed;
         public Item sItem;
         public Item sItemClone;
-
+        public int FoamBalls;
+        public bool Contagion;
+        public int ContagionBuffType;
+        public int minionTargetNPC;
+        public int summonTagDamage;
+        public int summonTagCrit;
         public override void PreUpdate()
         {
-             sItem = player.HeldItem;
-             sItemClone = sItem.Clone();
+            sItem = player.HeldItem;
+            sItemClone = sItem.Clone();
             sItemClone.SetDefaults(sItem.type);
         }
         public override void ResetEffects()
         {
-
+            Contagion = false;
             tileRangeBoost = 0;
             miningSpeed = 1f;
             if (player.armor[0].type == mod.ItemType("NeonVisor") && player.armor[1].type == mod.ItemType("NeonBreastplate") && player.armor[2].type == mod.ItemType("NeonLeggings"))
@@ -36,7 +40,7 @@ namespace OrsonsMod
                 tileRangeBoost += 2;
 
             }
-            
+
 
 
 
@@ -45,15 +49,43 @@ namespace OrsonsMod
 
 
         }
+        
+        public override void Hurt(bool pvp, bool quiet, double damage, int hitDirection, bool crit)
+        {
+
+            for (int i = 0; i < player.buffType.Length; i++)
+            { if (IsReturnableDebuff(player.buffType[i])) { ContagionBuffType = player.buffType[i]; player.AddBuff(ModContent.BuffType<Contagious>(), 600); break; } }
+        }
+        public override void ModifyHitNPCWithProj(Projectile proj, NPC target, ref int damage, ref float knockback, ref bool crit, ref int hitDirection)
+        {
+            if (proj.minion && target.whoAmI == player.MinionAttackTargetNPC) { damage += summonTagDamage; if (summonTagCrit > 0) { if (Main.rand.Next(1, 101) < summonTagCrit) { crit = true;  } } }
+        }
+        public override void OnHitNPCWithProj(Projectile proj, NPC target, int damage, float knockback, bool crit)
+        {
+           
+            if (player.HasBuff(ModContent.BuffType<Contagious>()) && ContagionBuffType != -1) { target.AddBuff(ContagionBuffType, 120); ContagionBuffType = -1; player.ClearBuff(ModContent.BuffType<Contagious>());}
+        }
+        public override void OnHitNPC(Item item, NPC target, int damage, float knockback, bool crit)
+        {
+
+            if (player.HasBuff(ModContent.BuffType<Contagious>()) && ContagionBuffType != -1) { target.AddBuff(ContagionBuffType, 120); ContagionBuffType = -1; player.ClearBuff(ModContent.BuffType<Contagious>()); }
+        }
+        private bool IsReturnableDebuff(int buffID)
+        {
+            int[] ReturnableVanillaBuffs = new int[16] { BuffID.Bleeding, BuffID.Poisoned, BuffID.OnFire, BuffID.Venom, BuffID.Confused, BuffID.CursedInferno, BuffID.Ichor, BuffID.Chilled, BuffID.Frozen, BuffID.Bleeding, BuffID.Electrified, BuffID.Suffocation, BuffID.Burning, BuffID.Frostburn, BuffID.Daybreak, BuffID.Oiled };
+            int[] ReturnableModdedBuffs = new int[1] { ModContent.BuffType<Diseased>() };
+            return (ReturnableVanillaBuffs.Contains(buffID) || ReturnableModdedBuffs.Contains(buffID));
+                
+        }
         public override void PostUpdateEquips()
         {
-            
+
             if (player.HeldItem.pick > 0)
             {
                 player.HeldItem.tileBoost = sItemClone.tileBoost;
                 player.HeldItem.tileBoost += tileRangeBoost;
                 player.meleeSpeed *= miningSpeed;
-                
+
 
             }
         }
@@ -62,64 +94,41 @@ namespace OrsonsMod
         {
             if (sItem.useStyle == ItemUseStyleID.Stabbing)
             { sItem.noMelee = true; }
-                return true;
+            return true;
         }
         public override void PostItemCheck()
         {
 
 
-            
-            
-            
+
+
+
             if (sItem.useStyle == ItemUseStyleID.Stabbing)
             {
                 sItem.noMelee = false;
                 Rectangle itemRectangle = new Rectangle((int)player.itemLocation.X, (int)player.itemLocation.Y, 32, 32);
-                if (!Main.dedServ)
-                {
-                    itemRectangle = new Rectangle((int)player.itemLocation.X, (int)player.itemLocation.Y, player.HeldItem.width, player.HeldItem.height);
-                }
-                itemRectangle.Width = (int)((float)itemRectangle.Width *sItem.scale);
-                itemRectangle.Height = (int)((float)itemRectangle.Height *sItem.scale);
-                if (player.direction == -1)
-                {
-                    itemRectangle.X -= itemRectangle.Width;
-                }
-                if (player.gravDir == 1f)
-                {
-                    itemRectangle.Y -= itemRectangle.Height;
-                }
-                if ((double)player.itemAnimation > (double)player.itemAnimationMax * 0.666)
-                {
+                int itemLength = (int)Math.Sqrt(player.HeldItem.width * player.HeldItem.width + player.HeldItem.height * player.HeldItem.height);
 
-                }
-                else
-                {
-                    if (player.direction == -1)
-                    {
-                        itemRectangle.X -= (int)((double)itemRectangle.Width * 1.4 - (double)itemRectangle.Width);
-                    }
-                    itemRectangle.Width = (int)((double)itemRectangle.Width * 1.4);
-                    itemRectangle.Y += (int)((double)itemRectangle.Height * 0.6);
-                    itemRectangle.Height = (int)((double)itemRectangle.Height * 0.6);
-                   
-                }
-                    float mouseDirection = (float)(Main.MouseWorld - player.Center).ToRotation();
+
+                float mouseDirection = (float)(Main.MouseWorld - player.Center).ToRotation();
                 Vector2 norm = Vector2.Normalize(Main.MouseWorld - player.Center);
-               sItem.useTurn = true;
+                sItem.useTurn = true;
                 if ((double)player.itemAnimation > (double)player.itemAnimationMax * 0.666)
                 {
                     player.itemLocation.X = -1000f;
                     player.itemLocation.Y = -1000f;
                     player.itemRotation = -1.3f * (float)player.direction;
+                    
                 }
                 else
                 {
-                    player.itemLocation.X = player.position.X + (float)player.width * 0.5f + ((float)sItem.width * 0.5f - 4f) * (float)((Main.MouseWorld.X > player.Center.X)? 1 : -1);
-                    
+                    player.itemLocation.X = player.position.X + (float)player.width * 0.5f;
+
                     player.itemLocation.Y = player.MountedCenter.Y;
-                    Vector2 offSet = norm * sItem.width * sItem.scale * ((float)player.itemAnimation / (float)(player.itemAnimationMax));
-                    player.itemLocation -= offSet;
+                    Vector2 offSet = (norm *35* ((float)player.itemAnimation / (float)(player.itemAnimationMax))) ;
+                   
+                    player.itemLocation -= offSet ;
+                    player.itemLocation += (norm * 15);
 
                     if ((double)player.itemAnimation > 0)
                     {
@@ -134,53 +143,50 @@ namespace OrsonsMod
                     {
                         player.itemRotation = mouseDirection + 0.75f;
                     }
-                    
+
                 }
                 if (player.gravDir == -1f)
                 {
                     player.itemRotation = 0f - player.itemRotation;
                     player.itemLocation.Y = player.position.Y + (float)player.height + (player.position.Y - player.itemLocation.Y);
                 }
-                
 
-                
-                if ((double)player.itemAnimation > (double)player.itemAnimationMax * 0.666)
+
+
+                if ((double)player.itemAnimation > 0)
                 {
+                    for (int i = 0; i < itemLength ; i++)
+                    {
+                        itemRectangle.X = (int)(player.Center.X + (i * norm.X))-3;
+                        itemRectangle.Y = (int)(player.Center.Y + (i * norm.Y))-3;
+                        itemRectangle.Width = 6;
+                        itemRectangle.Height = 6;
+                        
+                        ItemCheck_MeleeHitNPCs(sItem, itemRectangle, (int)(player.HeldItem.damage * (player.allDamage + player.meleeDamage - 1)), sItem.knockBack);
+                        
+                    }
                     
-
-                    itemRectangle.X = (int)(player.Center.X + (norm.X * itemRectangle.Width));
-                    itemRectangle.Y = (int)(player.Center.Y-5 + (norm.Y * itemRectangle.Height));
-                    Rectangle itemRectangle2 = new Rectangle();
-                    itemRectangle2.X = (int)(player.Center.X + (norm.X * (itemRectangle.Width / 2)));
-                    itemRectangle2.Y = (int)(player.Center.Y - 5 + (norm.Y * (itemRectangle.Height / 2)));
-                    itemRectangle.Width = 10;
-                    itemRectangle.Height = 10;
-                    
-                    itemRectangle2.Width = 10;
-                    itemRectangle2.Height = 10;
-                    ItemCheck_MeleeHitNPCs(sItem, itemRectangle,(int)( player.HeldItem.damage * (player.allDamage + player.meleeDamage - 1)), sItem.knockBack);
-                    ItemCheck_MeleeHitNPCs(sItem, itemRectangle2, (int)(player.HeldItem.damage * (player.allDamage + player.meleeDamage - 1)), sItem.knockBack);
                 }
 
 
             }
         }
-        private void ApplyNPCOnHitEffects(Item sItem, Rectangle itemRectangle, int damage, float knockBack, int npcIndex, int dmgRandomized, int dmgDone)
+        public void ApplyNPCOnHitEffects(Item sItem, Rectangle itemRectangle, int damage, float knockBack, int npcIndex, int dmgRandomized, int dmgDone)
         {
             bool fontDeathText = !Main.npc[npcIndex].immortal;
-            
+
             if (player.beetleOffense && fontDeathText)
             {
                 player.beetleCounter += dmgDone;
                 player.beetleCountdown = 0;
             }
-            
+
             if (player.meleeEnchant == 7)
             {
                 Projectile.NewProjectile(Main.npc[npcIndex].Center.X, Main.npc[npcIndex].Center.Y, Main.npc[npcIndex].velocity.X, Main.npc[npcIndex].velocity.Y, ProjectileID.ConfettiMelee, 0, 0f, player.whoAmI);
             }
-            
-            
+
+
             if (Main.npc[npcIndex].value > 0f && player.coins && Main.rand.Next(5) == 0)
             {
                 int type = 71;
@@ -203,7 +209,7 @@ namespace OrsonsMod
             }
         }
 
-        private void ItemCheck_MeleeHitNPCs(Item sItem, Rectangle itemRectangle, int originalDamage, float knockBack)
+        public void ItemCheck_MeleeHitNPCs(Item sItem, Rectangle itemRectangle, int originalDamage, float knockBack)
         {
             for (int HitNPC = 0; HitNPC < 200; HitNPC++)
             {
@@ -293,8 +299,8 @@ namespace OrsonsMod
 
             }
         }
-            
-    
+
+
     }
 
 }

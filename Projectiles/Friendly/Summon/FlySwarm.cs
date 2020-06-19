@@ -41,20 +41,29 @@ namespace OrsonsMod.Projectiles.Friendly.Summon
             projectile.width = 32;
             projectile.aiStyle = -1;
             projectile.minionSlots = 1f;
-            projectile.tileCollide = false;
+            
             projectile.penetrate = -1;
+            projectile.tileCollide = true;
             
             projectile.minion = true;
             Main.projFrames[projectile.type] = 4;
         }
+        public override bool OnTileCollide(Vector2 oldVelocity)
+        {
+            if (Main.tile[(int)projectile.Bottom.X/16, (int)projectile.Bottom.Y/16].type == 19)
+            { projectile.tileCollide = false; }
+            
+            return false;
+        }
 
         public override void AI()
         {
+            
             if (++projectile.frameCounter >= 5)
             {
                 projectile.frameCounter = 0;
                 projectile.frame = ++projectile.frame % Main.projFrames[projectile.type];
-
+                projectile.tileCollide = true;
 
             }
             Player player = Main.player[projectile.owner];
@@ -88,7 +97,8 @@ namespace OrsonsMod.Projectiles.Friendly.Summon
         {
             targetMag = 1000;
             target = -1;
-
+            if(Main.player[projectile.owner].MinionAttackTargetNPC > 0)
+            { target = Main.player[projectile.owner].MinionAttackTargetNPC; return; }
             for (whichNpc = 0; whichNpc < 200; whichNpc++)
             {
 
@@ -98,7 +108,7 @@ namespace OrsonsMod.Projectiles.Friendly.Summon
                     float whichNpcXpos = Main.npc[whichNpc].Center.X;
                     float whichNpcYpos = Main.npc[whichNpc].Center.Y;
                     float DistanceProjtoNpc = Math.Abs(this.projectile.position.X + (float)(this.projectile.width / 2) - whichNpcXpos) + Math.Abs(this.projectile.position.Y + (float)(this.projectile.height / 2) - whichNpcYpos);
-                    if (DistanceProjtoNpc < targetMag)
+                    if (DistanceProjtoNpc < targetMag && Collision.CanHit(projectile.Center, projectile.width, projectile.height, Main.npc[whichNpc].Center, Main.npc[whichNpc].width, Main.npc[whichNpc].height))
                     {
                         targetMag = (int)DistanceProjtoNpc;
                         target = whichNpc;
@@ -120,8 +130,8 @@ namespace OrsonsMod.Projectiles.Friendly.Summon
             Magnitude = Speed / Magnitude;
             Xdiff *= Magnitude;
             YDiff *= Magnitude;
-            projectile.velocity.X = (projectile.velocity.X * 80f + Xdiff) / 81f;
-            projectile.velocity.Y = (projectile.velocity.Y * 80f + YDiff) / 81f;
+            projectile.velocity.X = (projectile.velocity.X * 40f + Xdiff) / 41f;
+            projectile.velocity.Y = (projectile.velocity.Y * 40f + YDiff) / 41f;
         }
         
     }

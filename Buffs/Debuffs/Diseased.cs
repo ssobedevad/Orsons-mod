@@ -29,7 +29,7 @@ namespace OrsonsMod.Buffs.Debuffs
        
         public override void Update(Player player, ref int buffIndex)
         {
-            player.velocity *= 0.85f;
+            player.velocity.X *= 0.8f;
             player.allDamage *= 0.75f;
             player.potionDelay = player.buffTime[buffIndex];
 
@@ -43,7 +43,11 @@ namespace OrsonsMod.Buffs.Debuffs
         }
         public override void Update(NPC npc, ref int buffIndex)
         {
-            npc.velocity *= 0.85f;
+            
+            if(!npc.boss)
+            {
+                npc.velocity *= 0.85f;
+            }
             
 
             int Dustid = Dust.NewDust(new Vector2(npc.position.X, npc.position.Y + 2f), npc.width + 1, npc.height + 1, DustID.Marble, npc.velocity.X * 0.2f, npc.velocity.Y * 0.2f, 120, default(Color), 2f);

@@ -22,6 +22,7 @@ namespace OrsonsMod.NPCs
             npc.aiStyle = 3;
             npc.knockBackResist = 0.55f;
             npc.HitSound = SoundID.NPCHit1;
+            npc.DeathSound = SoundID.NPCDeath2;
             Main.npcFrameCount[npc.type] = 3;
             
             animationType = NPCID.Zombie;
@@ -32,7 +33,7 @@ namespace OrsonsMod.NPCs
         public override float SpawnChance(NPCSpawnInfo spawnInfo)
         {
 
-            return (!Main.dayTime) ? 0.2f : 0f;
+            return (!Main.dayTime) ? 0.05f : 0f;
 
 
 
@@ -46,7 +47,7 @@ namespace OrsonsMod.NPCs
         {
             if (Main.rand.Next(2) == 1)
             {
-                Item.NewItem(npc.getRect(), mod.ItemType("RabbidFoam"), 1);
+                Item.NewItem(npc.getRect(), mod.ItemType("RabidFoam"), 1);
             }
         }
     }

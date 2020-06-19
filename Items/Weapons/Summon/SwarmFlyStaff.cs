@@ -30,6 +30,9 @@ namespace OrsonsMod.Items.Weapons.Summon
             item.shoot = mod.ProjectileType("FlySwarm");
             item.useStyle = ItemUseStyleID.SwingThrow;
             item.noMelee = true;
+            item.rare = ItemRarityID.Orange;
+            item.value = 10000;
+            item.mana = 10;
 
         }
         

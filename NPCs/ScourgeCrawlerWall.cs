@@ -31,6 +31,7 @@ namespace OrsonsMod.NPCs
             Main.npcFrameCount[npc.type] = 4;
             npc.noGravity = true;
             npc.HitSound = SoundID.NPCHit29;
+            npc.DeathSound = SoundID.NPCDeath12;
             banner = mod.NPCType("ScourgeCrawler");
             bannerItem = mod.ItemType("ScourgeCrawlerBanner");
 

@@ -9,7 +9,7 @@ using Terraria.ID;
 
 namespace OrsonsMod.Items.Materials
 {
-    public class RabbidFoam : ModItem
+    public class RabidFoam : ModItem
     {
 
         public override void SetStaticDefaults()
