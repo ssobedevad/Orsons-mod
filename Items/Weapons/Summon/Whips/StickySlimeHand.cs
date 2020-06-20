@@ -11,12 +11,12 @@ using OrsonsMod.Projectiles.Friendly.Summon;
 
 namespace OrsonsMod.Items.Weapons.Summon.Whips
 {
-    public class SpikeySlapper : ModItem
+    public class StickySlimeHand : ModItem
     {
         public override void SetStaticDefaults()
         {
             
-            Tooltip.SetDefault("The giant spikey ball in a smaller more contained version" + "\n100 summon tag damage"+"\n100% summon tag crit" + "\nYour summons will focus struck enemies");
+            Tooltip.SetDefault("Shluurp" + "\n3 summon tag damage" + "\nDrags in loose items" + "\nYour summons will focus struck enemies");
         }
         public override void SetDefaults()
         {
@@ -26,16 +26,16 @@ namespace OrsonsMod.Items.Weapons.Summon.Whips
             item.useTime = 30;
             item.width = 18;
             item.height = 18;
-            item.shoot = mod.ProjectileType("SpikeySlapper");
+            item.shoot = mod.ProjectileType("StickySlimeHand");
             item.UseSound = SoundID.Item1;
             item.noMelee = true;
             item.summon = true;
             item.noUseGraphic = true;
             item.autoReuse = true;
-            item.damage = 99999999;
-            item.knockBack = 3;
+            item.damage = 12;
+            item.knockBack = 2;
             item.shootSpeed = 8;
-            item.rare = ItemRarityID.Purple;
+            item.rare = ItemRarityID.Blue;
 
         }
 

@@ -4,6 +4,7 @@ using Terraria.ID;
 using Microsoft.Xna.Framework;
 using OrsonsMod.Buffs.Debuffs;
 using OrsonsMod.Projectiles.Friendly.Summon;
+using OrsonsMod.Buffs.Buffs;
 
 namespace OrsonsMod.Projectiles.Friendly.Summon
 {
@@ -12,7 +13,9 @@ namespace OrsonsMod.Projectiles.Friendly.Summon
 
         public override void SafeSetDefaults()
         {
-            summonTagDamage = 7;
+            summonTagDamage = 5;
+            buffGivenToPlayer = ModContent.BuffType<NecroticBastion>();
+            buffTime = 120;
             
         }
 

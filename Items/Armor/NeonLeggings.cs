@@ -29,7 +29,7 @@ namespace OrsonsMod.Items.Armor
         {
 
 
-            player.GetModPlayer<OrsonsPlayer>().miningSpeed += 0.07f;
+            player.toolTime = (int)(player.toolTime * 0.93);
 
 
         }

@@ -16,14 +16,21 @@ namespace OrsonsMod.Projectiles.Friendly.Summon
         public float rangeMult = 1f;
         public int summonTagDamage;
         public int summonTagCrit;
+        public int buffGivenToPlayer;
+        public int buffTime;
+        public bool canPickUpItems;
+
+
+        private Rectangle handPos = new Rectangle(0, 0, 0, 0);
 
         private float rangeMultiplier;
         private float timeToFlyOut;
         private int segments;
+
         public override bool CloneNewInstances => true;
 
         public virtual void SafeSetDefaults()
-        {}
+        { }
         public override void SetDefaults()
         {
 
@@ -40,6 +47,9 @@ namespace OrsonsMod.Projectiles.Friendly.Summon
             projectile.localNPCHitCooldown = -1;
             summonTagDamage = 0;
             summonTagCrit = 0;
+            buffGivenToPlayer = -1;
+            buffTime = 120;
+            canPickUpItems = false;
             SafeSetDefaults();
 
         }
@@ -48,6 +58,7 @@ namespace OrsonsMod.Projectiles.Friendly.Summon
             player.MinionAttackTargetNPC = target.whoAmI;
             player.GetModPlayer<OrsonsPlayer>().summonTagDamage = summonTagDamage;
             player.GetModPlayer<OrsonsPlayer>().summonTagCrit = summonTagCrit;
+            if (buffGivenToPlayer != -1) { player.AddBuff(buffGivenToPlayer, buffTime); }
         }
         public override void AI()
         {
@@ -81,7 +92,7 @@ namespace OrsonsMod.Projectiles.Friendly.Summon
                 _whipPointsForCollision.Clear();
                 FillWhipControlPoints(projectile, _whipPointsForCollision);
                 Rectangle r2 = Utils.CenteredRectangle(_whipPointsForCollision[_whipPointsForCollision.Count - 1], new Vector2(30f, 30f));
-                
+
             }
 
 
@@ -142,7 +153,7 @@ namespace OrsonsMod.Projectiles.Friendly.Summon
             timeToFlyOut = Main.player[proj.owner].itemAnimationMax * proj.MaxUpdates;
             segments = 20;
             rangeMultiplier = rangeMult;
-            
+
         }
         public float GetLerpValue(float from, float to, float t, bool clamped = false)
         {
@@ -200,7 +211,7 @@ namespace OrsonsMod.Projectiles.Friendly.Summon
             Microsoft.Xna.Framework.Rectangle value2 = value.Frame();
             Vector2 origin = new Vector2(value2.Width / 2, 2f);
             Microsoft.Xna.Framework.Color originalColor = Microsoft.Xna.Framework.Color.White;
-            
+
             Vector2 value3 = list[0];
             for (int i = 0; i < list.Count - 1; i++)
             {
@@ -262,7 +273,12 @@ namespace OrsonsMod.Projectiles.Friendly.Summon
                     float rotation = vector4.ToRotation() - (float)Math.PI / 2f;
                     Color alpha = proj.GetAlpha(GetColor(vector3.ToTileCoordinates()));
                     spriteBatch.Draw(value, vector2 - Main.screenPosition, rectangle, alpha, rotation, origin, 1f, SpriteEffects.None, 0f);
-                    ItemCheck_MeleeHitNPCs(player.HeldItem, new Rectangle((int)vector2.X, (int)vector2.Y, rectangle.Width,rectangle.Height), (int)(player.HeldItem.damage * player.minionDamage), player.HeldItem.knockBack);
+                    handPos = new Rectangle((int)vector2.X, (int)vector2.Y, rectangle.Width, rectangle.Height);
+                    ItemCheck_MeleeHitNPCs(player.HeldItem, handPos, (int)(player.HeldItem.damage * player.minionDamage), player.HeldItem.knockBack);
+                    if (canPickUpItems)
+                    {
+                        ProjCheckPickupItems(handPos);
+                    }
                 }
                 vector2 += vector4;
             }
@@ -341,7 +357,7 @@ namespace OrsonsMod.Projectiles.Friendly.Summon
                         if (itemRectangle.Intersects(vector) && (Main.npc[HitNPC].noTileCollide || player.CanHit(Main.npc[HitNPC])))
                         {
                             int num = Main.DamageVar(originalDamage); ;
-                           
+
                             int NPCtype = Item.NPCtoBanner(Main.npc[HitNPC].BannerID());
                             if (NPCtype > 0 && player.NPCBannerBuff[NPCtype] == true)
                             {
@@ -377,10 +393,10 @@ namespace OrsonsMod.Projectiles.Friendly.Summon
                             }
                             if (Main.netMode != NetmodeID.SinglePlayer)
                             {
-                                
-                                
-                                    NetMessage.SendData(MessageID.StrikeNPC, -1, -1, null, HitNPC, RealDamage, knockBack, player.direction);
-                                
+
+
+                                NetMessage.SendData(MessageID.StrikeNPC, -1, -1, null, HitNPC, RealDamage, knockBack, player.direction);
+
                             }
                             if (player.accDreamCatcher)
                             {
@@ -403,6 +419,18 @@ namespace OrsonsMod.Projectiles.Friendly.Summon
                 }
 
 
+            }
+        }
+        public void ProjCheckPickupItems(Rectangle projRect)
+        {
+            for (int i = 0; i < Main.item.Length; i++)
+            {
+                if (Main.item[i].active)
+                {
+                    Item item = Main.item[i];
+                    if (projRect.Intersects(item.Hitbox)) { item.GetGlobalItem<OrsonsGlobalItem>().grabbedBySlimeWhip = player.whoAmI; }
+
+                }
             }
         }
     }

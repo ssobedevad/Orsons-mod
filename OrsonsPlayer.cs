@@ -15,7 +15,7 @@ namespace OrsonsMod
 
 
         public int tileRangeBoost;
-        public float miningSpeed;
+        
         public Item sItem;
         public Item sItemClone;
         public int FoamBalls;
@@ -24,6 +24,7 @@ namespace OrsonsMod
         public int minionTargetNPC;
         public int summonTagDamage;
         public int summonTagCrit;
+        public float damagePercentageTaken;
         public override void PreUpdate()
         {
             sItem = player.HeldItem;
@@ -34,7 +35,7 @@ namespace OrsonsMod
         {
             Contagion = false;
             tileRangeBoost = 0;
-            miningSpeed = 1f;
+            damagePercentageTaken = 1f;
             if (player.armor[0].type == mod.ItemType("NeonVisor") && player.armor[1].type == mod.ItemType("NeonBreastplate") && player.armor[2].type == mod.ItemType("NeonLeggings"))
             {
                 tileRangeBoost += 2;
@@ -49,7 +50,14 @@ namespace OrsonsMod
 
 
         }
-        
+        public override void ModifyHitByNPC(NPC npc, ref int damage, ref bool crit)
+        {
+           if(damagePercentageTaken < 1f) { damage = (int)(damage*damagePercentageTaken); }
+        }
+        public override void ModifyHitByProjectile(Projectile proj, ref int damage, ref bool crit)
+        {
+            if (damagePercentageTaken < 1f) { damage = (int)(damage * damagePercentageTaken); }
+        }
         public override void Hurt(bool pvp, bool quiet, double damage, int hitDirection, bool crit)
         {
 
@@ -84,7 +92,7 @@ namespace OrsonsMod
             {
                 player.HeldItem.tileBoost = sItemClone.tileBoost;
                 player.HeldItem.tileBoost += tileRangeBoost;
-                player.meleeSpeed *= miningSpeed;
+                
 
 
             }

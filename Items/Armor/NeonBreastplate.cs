@@ -31,8 +31,8 @@ namespace OrsonsMod.Items.Armor
         public override void UpdateEquip(Player player)
         {
 
-            player.GetModPlayer<OrsonsPlayer>().miningSpeed += 0.1f;
-
+           
+            player.toolTime = (int)(player.toolTime * 0.9);
 
 
 

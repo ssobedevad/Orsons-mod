@@ -16,7 +16,7 @@ namespace OrsonsMod.Items.Weapons.Summon.Whips
         public override void SetStaticDefaults()
         {
             DisplayName.SetDefault("Bone Smack");
-            Tooltip.SetDefault("Smack em' bois"+"\n7 summon tag damage"+ "\nYour summons will focus struck enemies");
+            Tooltip.SetDefault("Smack em' bois"+"\n5 summon tag damage"+"\nHitting enemies grants you the Necrotic Bastion buff"+ "\nYour summons will focus struck enemies");
         }
         public override void SetDefaults()
         {
@@ -32,7 +32,7 @@ namespace OrsonsMod.Items.Weapons.Summon.Whips
             item.summon = true;
             item.noUseGraphic = true;
             item.autoReuse = true;
-            item.damage = 25;
+            item.damage = 18;
             item.knockBack = 2;
             item.shootSpeed = 8;
             item.rare = ItemRarityID.Orange;

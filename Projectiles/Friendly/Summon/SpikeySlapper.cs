@@ -11,9 +11,9 @@ namespace OrsonsMod.Projectiles.Friendly.Summon
     {
         public override void SafeSetDefaults()
         {
-            rangeMult = 1.5f;
-            summonTagDamage = 15;
-            summonTagCrit = 5;
+            rangeMult = 1f;
+            summonTagDamage = 100;
+            summonTagCrit = 100;
         }
 
 
