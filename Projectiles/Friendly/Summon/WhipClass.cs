@@ -428,7 +428,7 @@ namespace OrsonsMod.Projectiles.Friendly.Summon
                 if (Main.item[i].active)
                 {
                     Item item = Main.item[i];
-                    if (projRect.Intersects(item.Hitbox)) { item.GetGlobalItem<OrsonsGlobalItem>().grabbedBySlimeWhip = player.whoAmI; }
+                    if (projRect.Intersects(item.Hitbox) && Collision.CanHit(item.position,1,1,player.Center,1,1)) { item.GetGlobalItem<OrsonsGlobalItem>().grabbedBySlimeWhip = player.whoAmI; }
 
                 }
             }

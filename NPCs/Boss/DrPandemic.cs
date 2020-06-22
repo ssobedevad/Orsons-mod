@@ -65,17 +65,17 @@ namespace OrsonsMod.NPCs.Boss
                 FloatAbovePlayer();
                 if (npc.ai[0] % 60 == 0) { Projectile.NewProjectile(npc.Center, ShootAtPlayer(16f, Main.player[npc.target]), ModContent.ProjectileType<RabidSpit>(), spitDamage, 0f, Main.myPlayer); }
                 npc.ai[0] += 1;
-                if (npc.ai[0] > 420) { npc.ai[1] = 1; npc.ai[0] = 0; }
-                for (int i = 0; i < Main.rand.Next(2, 5); i++) { NPC.NewNPC((int)npc.Center.X + Main.rand.Next(-100, 100), (int)npc.Center.Y + Main.rand.Next(-100, 100), ModContent.NPCType<PandemicFly>()); }
+                if (npc.ai[0] > 420) { npc.ai[1] = 1; npc.ai[0] = 0; for (int i = 0; i < Main.rand.Next(2, 5); i++) { NPC.NewNPC((int)npc.Center.X + Main.rand.Next(-100, 100), (int)npc.Center.Y + Main.rand.Next(-100, 100), ModContent.NPCType<PandemicFly>()); } }
+                
 
             }
             else if (npc.ai[1] == 1)
             {
-                for (int i = 0; i < Main.rand.Next(2, 5); i++) { NPC.NewNPC((int)npc.Center.X + Main.rand.Next(-100, 100), (int)npc.Center.Y + Main.rand.Next(-100, 100), ModContent.NPCType<PandemicFly>()); }
+                
                 npc.ai[0] += 1;
                 if (npc.ai[0] < 120) { DashToLeftSideOfPlayer(); if (npc.ai[0] % 40 == 0) { Projectile.NewProjectile(npc.Center, ShootAtPlayer(16f, Main.player[npc.target]), ModContent.ProjectileType<RabidSpit>(), spitDamage, 0f, Main.myPlayer); } }
                 else if (npc.ai[0] < 240) { FloatAbovePlayer(); if (npc.ai[0] % 40 == 0) { for (int i = 0; i < Main.rand.Next(2, 5); i++) { NPC.NewNPC((int)npc.Center.X + Main.rand.Next(-100, 100), (int)npc.Center.Y + Main.rand.Next(-100, 100), ModContent.NPCType<PandemicFly>()); } Projectile.NewProjectile(npc.Center, ShootAtPlayer(16f, Main.player[npc.target]), ModContent.ProjectileType<RabidSpit>(), spitDamage, 0f, Main.myPlayer); } }
-                else if (npc.ai[0] < 360) { DashToRightSideOfPlayer(); if (npc.ai[0] % 40 == 0) { Projectile.NewProjectile(npc.Center, ShootAtPlayer(16f, Main.player[npc.target]), ModContent.ProjectileType<RabidSpit>(), spitDamage, 0f, Main.myPlayer); } }
+                else if (npc.ai[0] < 360) { DashToRightSideOfPlayer(); if (npc.ai[0] % 40 == 0) { Projectile.NewProjectile(npc.Center, ShootAtPlayer(16f, Main.player[npc.target]), ModContent.ProjectileType<RabidSpit>(), spitDamage, 0f, Main.myPlayer); for (int i = 0; i < Main.rand.Next(2, 5); i++) { NPC.NewNPC((int)npc.Center.X + Main.rand.Next(-100, 100), (int)npc.Center.Y + Main.rand.Next(-100, 100), ModContent.NPCType<PandemicFly>()); } } }
                 else if (npc.ai[0] < 480) { FloatAbovePlayer(); if (npc.ai[0] % 40 == 0) { Projectile.NewProjectile(npc.Center, ShootAtPlayer(16f, Main.player[npc.target]), ModContent.ProjectileType<RabidSpit>(), spitDamage, 0f, Main.myPlayer); } }
                 if (phaseCounter <= 3 && npc.ai[0] >= 480) { npc.ai[0] = 0; phaseCounter += 1; }
                 if (phaseCounter >= 4) { npc.ai[0] = 0; phaseCounter = 0; npc.ai[1] = 0; for (int i = 0; i < Main.rand.Next(2, 5); i++) { NPC.NewNPC((int)npc.Center.X + Main.rand.Next(-100, 100), (int)npc.Center.Y + Main.rand.Next(-100, 100), ModContent.NPCType<PandemicFly>()); } }
