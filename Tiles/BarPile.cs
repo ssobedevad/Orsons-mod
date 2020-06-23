@@ -7,7 +7,7 @@ using static Terraria.ModLoader.ModContent;
 
 namespace OrsonsMod.Tiles
 {
-	public class NeonBar : ModTile
+	public class BarPile : ModTile
 	{
 		public override void SetDefaults()
 		{
@@ -31,6 +31,10 @@ namespace OrsonsMod.Tiles
 			if (style == 0) // It can be useful to share a single tile with multiple styles. This code will let you drop the appropriate bar if you had multiple.
 			{
 				Item.NewItem(i * 16, j * 16, 16, 16, mod.ItemType("NeonBar"));
+			}
+			if (style == 1) // It can be useful to share a single tile with multiple styles. This code will let you drop the appropriate bar if you had multiple.
+			{
+				Item.NewItem(i * 16, j * 16, 16, 16, mod.ItemType("ColdstoneBar"));
 			}
 			return base.Drop(i, j);
 		}

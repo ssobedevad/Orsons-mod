@@ -59,7 +59,7 @@ namespace OrsonsMod.Tiles
 					item = "FoamyZombiebanner";
 					break;
 				case 7:
-					item = "CarnageCrimeaBanner";
+					item = "CarnageCrimeraBanner";
 					break;
 				case 8:
 					item = "CursedPharaohBanner";
@@ -103,7 +103,7 @@ namespace OrsonsMod.Tiles
 						type = "FoamyZombie";
 						break;
 					case 7:
-						type = "CarnageCrimea";
+						type = "CarnageCrimera";
 						break;
 					case 8:
 						type = "CursedPharaoh";

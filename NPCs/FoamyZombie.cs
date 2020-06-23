@@ -45,6 +45,9 @@ namespace OrsonsMod.NPCs
         }
         public override void NPCLoot()
         {
+            Gore.NewGore(npc.Center, npc.velocity + new Vector2(Main.rand.Next(-1, 1), Main.rand.Next(-1, 1)), mod.GetGoreSlot("Gores/FoamyZombieHead"), 1f);
+            Gore.NewGore(npc.Center, npc.velocity + new Vector2(Main.rand.Next(-1, 1), Main.rand.Next(-1, 1)), mod.GetGoreSlot("Gores/FoamyZombieArm"), 1f);
+            Gore.NewGore(npc.Center, npc.velocity + new Vector2(Main.rand.Next(-1, 1), Main.rand.Next(-1, 1)), mod.GetGoreSlot("Gores/FoamyZombieLeg"), 1f);
             if (Main.rand.Next(2) == 1)
             {
                 Item.NewItem(npc.getRect(), mod.ItemType("RabidFoam"), 1);

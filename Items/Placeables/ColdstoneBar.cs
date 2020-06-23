@@ -9,13 +9,13 @@ using Terraria.ID;
 
 namespace OrsonsMod.Items.Placeables
 {
-    public class NeonBar : ModItem
+    public class ColdstoneBar : ModItem
     {
 
         public override void SetStaticDefaults()
         {
-            DisplayName.SetDefault("Neon Bar");
-            Tooltip.SetDefault("It radiates a warm glow of light");
+            DisplayName.SetDefault("Coldstone Bar");
+            Tooltip.SetDefault("Like regular stone bars just colder");
 
         }
         public override void SetDefaults()
@@ -32,18 +32,18 @@ namespace OrsonsMod.Items.Placeables
             item.autoReuse = true;
             item.consumable = true;
             item.createTile = mod.TileType("BarPile");
-            item.placeStyle = 0;
-            
+            item.placeStyle = 1;
+
         }
         public override void AddRecipes()
         {
             ModRecipe recipe = new ModRecipe(mod);
-            recipe.AddIngredient(mod.ItemType("NeonScrap"), 2);
-            recipe.AddIngredient(ItemID.MeteoriteBar);
+            recipe.AddIngredient(mod.ItemType("ColdstoneOre"), 3);
+            
             recipe.AddTile(TileID.Furnaces);
-            recipe.SetResult(this,2);
+            recipe.SetResult(this);
             recipe.AddRecipe();
         }
-        
+
     }
 }

@@ -15,6 +15,7 @@ namespace OrsonsMod.NPCs
             npc.CloneDefaults(NPCID.GoblinSorcerer);
             animationType = NPCID.GoblinSorcerer;
             npc.aiStyle = -1;
+            npc.HitSound = SoundID.NPCHit1;
             npc.lifeMax = 70;
             npc.damage = 20;
             npc.defense = 3;

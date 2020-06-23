@@ -39,7 +39,7 @@ namespace OrsonsMod
                     }
                 }
             }
-            if(npc.type == NPCID.KingSlime) { if (Main.rand.Next(0, 4) == 1) { Item.NewItem(npc.Hitbox, ModContent.ItemType<SpikeySlapper>()); } }
+            if(npc.type == NPCID.KingSlime) { if (Main.rand.Next(0, 4) == 1) { Item.NewItem(npc.Hitbox, ModContent.ItemType<StickySlimeHand>()); } }
             if (npc.type == NPCID.SkeletronHead) { if (Main.rand.Next(0, 4) == 1) { Item.NewItem(npc.Hitbox, ModContent.ItemType<BoneSmack>()); } }
 
 

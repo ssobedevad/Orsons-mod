@@ -16,7 +16,7 @@ namespace OrsonsMod.Projectiles.Friendly.Summon
             summonTagDamage = 5;
             buffGivenToPlayer = ModContent.BuffType<NecroticBastion>();
             buffTime = 120;
-            rangeMult = 0.75f;
+            rangeMult = 0.5f;
             
         }
 

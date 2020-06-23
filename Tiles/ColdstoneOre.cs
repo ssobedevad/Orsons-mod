@@ -11,19 +11,21 @@ using Microsoft.Xna.Framework.Graphics;
 using Terraria.ObjectData;
 namespace OrsonsMod.Tiles
 {
-    public class NeonScrap : ModTile
+    public class ColdstoneOre : ModTile
     {
         public override void SetDefaults()
         {
             TileID.Sets.Ore[Type] = true;
             Main.tileSolid[Type] = true;
-            Main.tileMergeDirt[Type] = true;
+            Main.tileMerge[Type][TileID.SnowBlock] = true;
+            Main.tileMerge[TileID.SnowBlock][Type] = true;
+            Main.tileMergeDirt[Type] = false;
             Main.tileSpelunker[Type] = true;
-            Main.tileLighted[Type] = true;
+            Main.tileLighted[Type] = false;
             Main.tileBlockLight[Type] = true;
-            drop = mod.ItemType("NeonScrap");
-            AddMapEntry(new Color(255, 105, 0));
-            minPick = 50;
+            drop = mod.ItemType("ColdstoneOre");
+            AddMapEntry(new Color(0, 20, 255));
+            minPick = 65;
         }
 
     }
