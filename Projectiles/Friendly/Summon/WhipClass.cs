@@ -61,7 +61,10 @@ namespace OrsonsMod.Projectiles.Friendly.Summon
             player.GetModPlayer<OrsonsPlayer>().summonTagDamage = summonTagDamage;
             player.GetModPlayer<OrsonsPlayer>().summonTagCrit = summonTagCrit;
             if (buffGivenToPlayer != -1) { player.AddBuff(buffGivenToPlayer, buffTime); }
+            NpcEffects(target, damage, knockback, crit);
         }
+        public virtual void NpcEffects(NPC target, int damage, float knockback, bool crit)
+        { }
         public override void AI()
         {
             if(projectile.ai[0] == 0) { projectile.velocity *= rangeMult; projectile.ai[0] = 1; }

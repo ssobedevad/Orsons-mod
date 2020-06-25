@@ -18,7 +18,7 @@ namespace OrsonsMod.Projectiles.Friendly.Summon
             rangeMult = 0.5f;
         }
         
-        public override void OnHitNPC(NPC target, int damage, float knockback, bool crit)
+        public override void NpcEffects(NPC target, int damage, float knockback, bool crit)
         {
             target.AddBuff(BuffID.Slimed, 600);
         }

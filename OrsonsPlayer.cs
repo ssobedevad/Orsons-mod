@@ -21,7 +21,7 @@ namespace OrsonsMod
         public int FoamBalls;
         public bool Contagion;
         public int ContagionBuffType;
-        public int minionTargetNPC;
+   
         public int summonTagDamage;
         public int summonTagCrit;
         public float damagePercentageTaken;

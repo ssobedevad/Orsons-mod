@@ -9,7 +9,7 @@ using Terraria.Modules;
 using Terraria.ID;
 using Microsoft.Xna.Framework;
 
-namespace OrsonsMod.Projectiles.Friendly.Summon
+namespace OrsonsMod.Projectiles.Friendly.Summon.Minions
 {
     public class FlySwarm : ModProjectile
     {

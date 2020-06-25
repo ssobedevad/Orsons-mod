@@ -24,7 +24,7 @@ namespace OrsonsMod.Items.Weapons.Magic
             item.width = 58;
             item.height = 26;
             item.useTime = 18;
-            item.UseSound = SoundID.Item2;
+            item.UseSound = SoundID.Item24;
             item.useStyle = ItemUseStyleID.HoldingOut;
             item.shootSpeed = 9f;
             item.useAnimation = 18;
