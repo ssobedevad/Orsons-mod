@@ -168,7 +168,7 @@ namespace OrsonsMod.NPCs
 
         public override float SpawnChance(NPCSpawnInfo spawnInfo)
         {
-            return spawnInfo.player.ZoneUndergroundDesert ? 0.2f : 0;
+            return spawnInfo.player.ZoneUndergroundDesert ? 0.05f : 0;
         }
     }
 }

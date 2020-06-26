@@ -17,7 +17,7 @@ namespace OrsonsMod.Projectiles.Friendly.Magic
             bodyDimensions = new Vector2(22,4);
             headDimensions = new Vector2(22, 6);
             headDimensions = new Vector2(22, 14);
-
+            MaxDist = 500;
         }
     }
 }

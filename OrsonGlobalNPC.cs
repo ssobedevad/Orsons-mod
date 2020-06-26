@@ -14,6 +14,7 @@ using System;
 using OrsonsMod.Items.Weapons.Summon.Whips;
 using OrsonsMod.Items.Weapons.Flails;
 using OrsonsMod.Items.Weapons.Spears;
+using OrsonsMod.Items.Weapons.Summon;
 
 namespace OrsonsMod
 {
@@ -45,6 +46,7 @@ namespace OrsonsMod
             if (npc.type == NPCID.SkeletronHead) { if (Main.rand.Next(0, 4) == 1) { Item.NewItem(npc.Hitbox, ModContent.ItemType<BoneSmack>()); } }
             if (npc.type == NPCID.EyeofCthulhu) { if (Main.rand.Next(0, 4) == 1) { Item.NewItem(npc.Hitbox, ModContent.ItemType<EyeSore>()); } }
             if (npc.type == NPCID.EaterofWorldsHead && !NPC.AnyNPCs(NPCID.EaterofWorldsTail)) { if (Main.rand.Next(0, 4) == 1) { Item.NewItem(npc.Hitbox, ModContent.ItemType<ScourgeFork>()); } }
+            if (npc.type == NPCID.BrainofCthulhu ) { if (Main.rand.Next(0, 4) == 1) { Item.NewItem(npc.Hitbox, ModContent.ItemType<CreeperGuardStaff>()); } }
 
 
         }

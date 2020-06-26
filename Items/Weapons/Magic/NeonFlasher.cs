@@ -13,6 +13,7 @@ namespace OrsonsMod.Items.Weapons.Magic
         public override void SetStaticDefaults()
         {
             Tooltip.SetDefault("Casts a beam of light that damages anything caught in it");
+            Item.staff[item.type] = true;
         }
 
         public override void SetDefaults()
@@ -23,7 +24,7 @@ namespace OrsonsMod.Items.Weapons.Magic
             item.channel = true; //Channel so that you can held the weapon [Important]
             item.mana = 17;
             item.rare = ItemRarityID.Green;
-            
+            item.reuseDelay = 30;
             item.useTime = 30;
             item.UseSound = SoundID.Item13;
             item.useStyle = ItemUseStyleID.HoldingOut;

@@ -75,7 +75,11 @@ namespace OrsonsMod.Projectiles
             // Draws the laser 'body'
             for (float i = transDist; i <= Distance; i += step)
             {
-                Color c = Color.White;
+                Color c = projectile.GetAlpha(Color.White);
+                c.R = (byte)(c.R * (1) / 20);
+                c.G = (byte)(c.G * (1) / 20);
+                c.B = (byte)(c.B * (1) / 20);
+                c.A = (byte)(c.A * (1) / 20);
                 var origin = start + i * unit;
                 spriteBatch.Draw(texture, origin - Main.screenPosition,
                     new Rectangle(0, (int)heldDimensions.Y + 2, (int)bodyDimensions.X, (int)bodyDimensions.Y), i < transDist ? Color.Transparent : c, r,
@@ -121,7 +125,7 @@ namespace OrsonsMod.Projectiles
         // Set custom immunity time on hitting an NPC
         public override void OnHitNPC(NPC target, int damage, float knockback, bool crit)
         {
-            target.immune[projectile.owner] = 6;
+            target.immune[projectile.owner] = 4;
         }
 
         // The AI of the projectile
@@ -146,7 +150,7 @@ namespace OrsonsMod.Projectiles
             SetLaserPosition(player);
             if (SpecialEffectType == 1)
             {
-                if (projectile.timeLeft > 20) { projectile.timeLeft = 20; }
+                if (projectile.timeLeft > 4) { projectile.timeLeft = 4; }
             }
             
         }

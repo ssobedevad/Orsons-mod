@@ -9,7 +9,12 @@ namespace OrsonsMod.Items.Weapons.Magic
 {
     public class ColdstoneCane : ModItem
     {
-        
+        public override void SetStaticDefaults()
+        {
+           
+            Item.staff[item.type] = true;
+        }
+
 
         public override void SetDefaults()
         {
