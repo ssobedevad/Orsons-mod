@@ -15,10 +15,10 @@ namespace OrsonsMod
 
 
         public int tileRangeBoost;
-        
+        public bool guardMinion;
         public Item sItem;
         public Item sItemClone;
-        public int FoamBalls;
+        public bool SeedCollect;
         public bool Contagion;
         public int ContagionBuffType;
    
@@ -33,6 +33,7 @@ namespace OrsonsMod
         }
         public override void ResetEffects()
         {
+            SeedCollect = false;
             Contagion = false;
             tileRangeBoost = 0;
             damagePercentageTaken = 1f;
@@ -50,6 +51,7 @@ namespace OrsonsMod
 
 
         }
+        
         public override void ModifyHitByNPC(NPC npc, ref int damage, ref bool crit)
         {
            if(damagePercentageTaken < 1f) { damage = (int)(damage*damagePercentageTaken); }

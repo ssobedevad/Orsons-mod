@@ -15,6 +15,13 @@ using OrsonsMod.Items.Weapons.Summon.Whips;
 using OrsonsMod.Items.Weapons.Flails;
 using OrsonsMod.Items.Weapons.Spears;
 using OrsonsMod.Items.Weapons.Summon;
+using OrsonsMod.Items.Weapons.Thrown;
+using OrsonsMod.Items.Weapons.Blowpipes;
+using OrsonsMod.Items.Weapons.Magic;
+using OrsonsMod.Items.Weapons.Bows;
+using OrsonsMod.Items.Weapons.Swords;
+using OrsonsMod.Items.Tools;
+
 
 namespace OrsonsMod
 {
@@ -42,11 +49,15 @@ namespace OrsonsMod
                     }
                 }
             }
-            if(npc.type == NPCID.KingSlime) { if (Main.rand.Next(0, 4) == 1) { Item.NewItem(npc.Hitbox, ModContent.ItemType<StickySlimeHand>()); } }
-            if (npc.type == NPCID.SkeletronHead) { if (Main.rand.Next(0, 4) == 1) { Item.NewItem(npc.Hitbox, ModContent.ItemType<BoneSmack>()); } }
-            if (npc.type == NPCID.EyeofCthulhu) { if (Main.rand.Next(0, 4) == 1) { Item.NewItem(npc.Hitbox, ModContent.ItemType<EyeSore>()); } }
-            if (npc.type == NPCID.EaterofWorldsHead && !NPC.AnyNPCs(NPCID.EaterofWorldsTail)) { if (Main.rand.Next(0, 4) == 1) { Item.NewItem(npc.Hitbox, ModContent.ItemType<ScourgeFork>()); } }
-            if (npc.type == NPCID.BrainofCthulhu ) { if (Main.rand.Next(0, 4) == 1) { Item.NewItem(npc.Hitbox, ModContent.ItemType<CreeperGuardStaff>()); } }
+            if (!Main.expertMode)
+            {
+                int rand = Main.rand.Next(1, 5);
+                if (npc.type == NPCID.KingSlime) { if (rand == 1) { Item.NewItem(npc.Hitbox, ModContent.ItemType<StickySlimeHand>()); }else if (rand == 2) { Item.NewItem(npc.Hitbox, ModContent.ItemType<SlimedNinjasThrowingGlove>()); } else if (rand == 3) { Item.NewItem(npc.Hitbox, ModContent.ItemType<SlimeSlammer>()); } else if (rand == 2) { Item.NewItem(npc.Hitbox, ModContent.ItemType<SlimeShield>()); } }
+                if (npc.type == NPCID.SkeletronHead) { if (rand == 1) { Item.NewItem(npc.Hitbox, ModContent.ItemType<BoneSmack>()); } }
+                if (npc.type == NPCID.EyeofCthulhu) { if (rand == 1) { Item.NewItem(npc.Hitbox, ModContent.ItemType<EyeSore>()); } else if (rand == 2) { Item.NewItem(npc.Hitbox, ModContent.ItemType<EyeServantGuardStaff>()); } else if (rand == 3) { Item.NewItem(npc.Hitbox, ModContent.ItemType<Macula>()); } else if (rand == 4) { Item.NewItem(npc.Hitbox, ModContent.ItemType<EyeChaser>()); } }
+                if (npc.type == NPCID.EaterofWorldsHead && !NPC.AnyNPCs(NPCID.EaterofWorldsTail)) { if (rand == 1) { Item.NewItem(npc.Hitbox, ModContent.ItemType<ScourgeFork>()); } }
+                if (npc.type == NPCID.BrainofCthulhu) { if (rand == 1) { Item.NewItem(npc.Hitbox, ModContent.ItemType<CreeperGuardStaff>()); } else if (rand == 2) { Item.NewItem(npc.Hitbox, ModContent.ItemType<CerrebellumBow>()); } else if (rand == 3) { Item.NewItem(npc.Hitbox, ModContent.ItemType<CraniumBlade>()); } }
+            }
 
 
         }

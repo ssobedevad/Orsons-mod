@@ -12,10 +12,10 @@ using Microsoft.Xna.Framework.Graphics;
 
 namespace OrsonsMod.Projectiles.Friendly.Summon.Minions
 {
-    public class CreeperGuard : ModProjectile
+    public class EyeServantGuard : ModProjectile
     {
         public float speed;
-       
+
         public int target;
         public int targetMag;
         private Vector2[] oldPos = new Vector2[9] { Vector2.Zero, Vector2.Zero, Vector2.Zero, Vector2.Zero, Vector2.Zero, Vector2.Zero, Vector2.Zero, Vector2.Zero, Vector2.Zero, };
@@ -33,7 +33,7 @@ namespace OrsonsMod.Projectiles.Friendly.Summon.Minions
             projectile.width = 22;               //this is where you put the npc sprite width.     important
             projectile.height = 22;              //this is where you put the npc sprite height.   important
 
-
+            Main.projFrames[projectile.type] = 3;
             projectile.aiStyle = -1;
             projectile.friendly = true;
             projectile.penetrate = -1;
@@ -68,46 +68,52 @@ namespace OrsonsMod.Projectiles.Friendly.Summon.Minions
             Player player = Main.player[projectile.owner];
             if (player.dead || !player.active)
             {
-                player.ClearBuff(mod.BuffType("CreeperBodyGuard"));
+                player.ClearBuff(mod.BuffType("CthuluServantBodyGuard"));
                 player.GetModPlayer<OrsonsPlayer>().guardMinion = false;
             }
-            if (player.HasBuff(mod.BuffType("CreeperBodyGuard")))
+            if (player.HasBuff(mod.BuffType("CthuluServantBodyGuard")))
             {
                 projectile.timeLeft = 2;
                 player.GetModPlayer<OrsonsPlayer>().guardMinion = true;
             }
-            
+
             Target(player);
+            projectile.rotation = projectile.velocity.ToRotation() + 3.14f;
+            if (++projectile.frameCounter % 5 == 0)
+            {
+                projectile.frame += 1;
+                if (projectile.frame >= Main.projFrames[projectile.type]) { projectile.frame = 1; }
+            }
+                if (target != -1)
+                {
+                    CircleAroundPlayer(player);
+                }
+                else
+                {
+                    float Xdiff = player.Center.X - projectile.Center.X + Main.rand.Next(-10, 10);
+                    float YDiff = player.Center.Y - projectile.Center.Y + Main.rand.Next(-10, 10);
+                    projectile.ai[1] = projectile.ai[0] * 1.5f;
+                    Vector2 difference = new Vector2(Xdiff, YDiff);
+                    float Magnitude = Mag(difference);
+
+                    speed = 8f;
+                    if (Magnitude > 100) { speed = 18f; }
+                    else if (Magnitude > 220) { speed = 30f; }
+                    else if (Magnitude > 350) { speed = 50f; }
+
+
+
+                    Magnitude = speed / Magnitude;
+                    Xdiff *= Magnitude;
+                    YDiff *= Magnitude;
+
+                    projectile.velocity.X = (projectile.velocity.X * 100f + Xdiff + Main.rand.Next(-10, 10)) / 101f;
+                    projectile.velocity.Y = (projectile.velocity.Y * 100f + YDiff + Main.rand.Next(-10, 10)) / 101f;
+                }
+
+
+
             
-            if (target != -1)
-            {
-                CircleAroundPlayer(player);
-            }
-            else
-            {
-                float Xdiff = player.Center.X - projectile.Center.X + Main.rand.Next(-10, 10);
-                float YDiff = player.Center.Y - projectile.Center.Y + Main.rand.Next(-10, 10);
-                projectile.rotation = projectile.ai[0] * 1.2f;
-                Vector2 difference = new Vector2(Xdiff, YDiff);
-                float Magnitude = Mag(difference);
-
-                speed = 5f;
-                if (Magnitude > 100) { speed = 15f; }
-                else if (Magnitude > 220) { speed = 30f; }
-                else if (Magnitude > 350) { speed = 50f; }
-                
-                
-
-                Magnitude = speed / Magnitude;
-                Xdiff *= Magnitude;
-                YDiff *= Magnitude;
-
-                projectile.velocity.X = (projectile.velocity.X * 50f + Xdiff + Main.rand.Next(-10, 10)) / 51f;
-                projectile.velocity.Y = (projectile.velocity.Y * 50f + YDiff + Main.rand.Next(-10, 10)) / 51f;
-            }
-           
-
-           
         }
         private void Target(Player player)
         {
@@ -130,7 +136,7 @@ namespace OrsonsMod.Projectiles.Friendly.Summon.Minions
 
         }
 
-        
+
         private float Mag(Vector2 mag)
         {
             return (float)Math.Sqrt(mag.X * mag.X + mag.Y * mag.Y);
@@ -141,7 +147,7 @@ namespace OrsonsMod.Projectiles.Friendly.Summon.Minions
             {
                 Vector2 oldV = oldPos[i];
                 Vector2 vect = new Vector2(oldV.X - Main.screenPosition.X, oldV.Y - Main.screenPosition.Y);
-                Rectangle rect = new Rectangle(0, 0, projectile.width, projectile.height);
+                Rectangle rect = new Rectangle(0, 23 * projectile.frame, 38, 22);
 
                 Color alpha9 = projectile.GetAlpha(Color.White);
                 alpha9.R = (byte)(alpha9.R * (10 - (2 * i)) / 20);
@@ -157,7 +163,7 @@ namespace OrsonsMod.Projectiles.Friendly.Summon.Minions
 
             }
             Vector2 vect2 = new Vector2(projectile.position.X + projectile.width / 2 - Main.screenPosition.X, projectile.position.Y + projectile.height / 2 - Main.screenPosition.Y);
-            Rectangle rect2 = new Rectangle(0, 0, projectile.width, projectile.height);
+            Rectangle rect2 = new Rectangle(0, 23 * projectile.frame, 38, 22);
             spriteBatch.Draw(
                     ModContent.GetTexture(Texture),
                      vect2, rect2, Color.White, projectile.rotation, new Vector2(projectile.width / 2, projectile.height / 2), 1f, SpriteEffects.None, 0f);
@@ -166,9 +172,9 @@ namespace OrsonsMod.Projectiles.Friendly.Summon.Minions
         }
         private void CircleAroundPlayer(Player player)
         {
-            projectile.rotation += 0.1f;
+            projectile.ai[1] += 0.1f;
 
-            Vector2 moveTo = new Vector2(player.Center.X - 10 + (float)Math.Cos(projectile.rotation) * 50f, player.Center.Y - 12 + (float)Math.Sin(projectile.rotation) * 50f);
+            Vector2 moveTo = new Vector2(player.Center.X + (float)Math.Cos(projectile.ai[1]) * 50f, player.Center.Y + (float)Math.Sin(projectile.ai[1]) * 50f);
             moveTo = moveTo - projectile.Center;
             float Mag = (float)Math.Sqrt((moveTo.X * moveTo.X + moveTo.Y * moveTo.Y));
             moveTo *= (20 / Mag);

@@ -5,45 +5,44 @@ using Terraria.ModLoader;
 
 using Microsoft.Xna.Framework;
 
-namespace OrsonsMod.Items.Weapons.Magic
+namespace OrsonsMod.Items.Weapons.Repeaters
 {
-    public class FoamBarrier : ModItem
+    public class EaterRepeater : ModItem
     {
         public override void SetStaticDefaults()
         {
-            Tooltip.SetDefault("Conjure up a foamy ball that will surround you and disease foes");
+            Tooltip.SetDefault("Turns wooden arrows into unholy arrows");
         }
 
         public override void SetDefaults()
         {
-            item.damage = 18;
+            item.damage = 15;
             item.noMelee = true;
-            item.magic = true;
-            item.knockBack = 3f;
+            item.ranged = true;
+            item.autoReuse = true;
             item.rare = ItemRarityID.Orange;
-            item.width = 58;
-            item.height = 26;
+            
             item.useTime = 18;
-            item.UseSound = SoundID.Item24;
+            item.UseSound = SoundID.Item5;
             item.useStyle = ItemUseStyleID.HoldingOut;
             item.shootSpeed = 9f;
             item.useAnimation = 18;
-            item.shoot = mod.ProjectileType("FoamyBall");
-            item.mana = 14;
-            item.value = 10000;
-            item.crit = 1;
+            item.shoot = ProjectileID.UnholyArrow;
+            item.useAmmo = AmmoID.Arrow;
+            item.value = 20000;
         }
-        public override bool CanUseItem(Player player)
-        {
-            return !(player.ownedProjectileCounts[mod.ProjectileType("FoamyBall")] >= 6);
-        }
+
         public override bool Shoot(Player player, ref Vector2 position, ref float speedX, ref float speedY, ref int type, ref int damage, ref float knockBack)
         {
 
-
-                
+            if (type == ProjectileID.WoodenArrowFriendly)
+            {
+                Projectile.NewProjectile(position.X, position.Y, speedX, speedY, item.shoot, damage, knockBack, player.whoAmI);
+            }
+            else
+            {
                 Projectile.NewProjectile(position.X, position.Y, speedX, speedY, type, damage, knockBack, player.whoAmI);
-            
+            }
 
             return false;
         }

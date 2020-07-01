@@ -21,7 +21,7 @@ namespace OrsonsMod.Items.Weapons.Spears
 			item.width = 32;
 			item.height = 32;
 			item.scale = 1f;
-			item.rare = ItemRarityID.Green;
+			item.rare = ItemRarityID.Orange;
 			item.value = 20000;
 			item.crit = 1;
 			item.melee = true;

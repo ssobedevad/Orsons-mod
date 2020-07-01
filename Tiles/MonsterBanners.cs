@@ -64,6 +64,9 @@ namespace OrsonsMod.Tiles
 				case 8:
 					item = "CursedPharaohBanner";
 					break;
+				case 9:
+					item = "SnowyApparitionBanner";
+					break;
 				default:
 					return;
 			}
@@ -107,6 +110,9 @@ namespace OrsonsMod.Tiles
 						break;
 					case 8:
 						type = "CursedPharaoh";
+						break;
+					case 9:
+						type = "SnowyApparition";
 						break;
 					default:
 						return;

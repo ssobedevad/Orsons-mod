@@ -199,7 +199,7 @@ namespace OrsonsMod.NPCs
             Gore.NewGore(npc.Center, npc.velocity + new Vector2(Main.rand.Next(-1, 1), Main.rand.Next(-1, 1)), mod.GetGoreSlot("Gores/ScourgeCrawlerBody"), 1f);
             for (int i = 0; i < 8; i++)
             {
-                Gore.NewGore(npc.Center, npc.velocity + new Vector2(Main.rand.Next(-1, 1), Main.rand.Next(-1, 1)), mod.GetGoreSlot("Gores/ScourgeCrawlerleg"), 1f);
+                Gore.NewGore(npc.Center, npc.velocity + new Vector2(Main.rand.Next(-1, 1), Main.rand.Next(-1, 1)), mod.GetGoreSlot("Gores/ScourgeCrawlerLeg"), 1f);
             }
             if (Main.rand.Next(3) == 2)
             {
