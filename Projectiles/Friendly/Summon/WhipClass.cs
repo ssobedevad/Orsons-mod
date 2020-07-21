@@ -65,8 +65,11 @@ namespace OrsonsMod.Projectiles.Friendly.Summon
         }
         public virtual void NpcEffects(NPC target, int damage, float knockback, bool crit)
         { }
+        public virtual void AIEffects(Player player)
+        { }
         public override void AI()
         {
+            AIEffects(player);
             if(projectile.ai[0] == 0) { projectile.velocity *= rangeMult; projectile.ai[0] = 1; }
             player = Main.player[projectile.owner];
             projectile.rotation = projectile.velocity.ToRotation() + (float)Math.PI / 2f;

@@ -38,10 +38,26 @@ namespace OrsonsMod.Items.Weapons.Summon
         
         public override bool Shoot(Player player, ref Vector2 position, ref float speedX, ref float speedY, ref int type, ref int damage, ref float knockBack)
         {
-            player.AddBuff(item.buffType, 2, true);
+            player.AddBuff(item.buffType, 7200, true);
+           
             position = Main.MouseWorld;
+
+            int turretNum = 0;
+            for (int i = 0; i < Main.projectile.Length;i++)
+            {
+                Projectile proji = Main.projectile[i];
+                if(proji.active && proji.sentry)
+                { turretNum++; }
+                    
+                        
+            }
+           
+            if (turretNum >= player.maxTurrets)
+            {
+                player.WipeOldestTurret();
+            }
             
-            
+
             return true;
         }
 

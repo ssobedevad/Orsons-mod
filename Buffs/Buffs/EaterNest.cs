@@ -19,19 +19,12 @@ namespace OrsonsMod.Buffs.Buffs
             Main.buffNoSave[Type] = true;
             Main.buffNoTimeDisplay[Type] = true;
         }
-
         public override void Update(Player player, ref int buffIndex)
         {
-            if (player.ownedProjectileCounts[mod.ProjectileType("EaterNest")] > 0)
-            {
-                player.buffTime[buffIndex] = 18000;
-            }
-            else
-            {
-                player.DelBuff(buffIndex);
-                buffIndex--;
-            }
+            if(player.ownedProjectileCounts[mod.ProjectileType("EaterNest")] == 0)
+            { player.buffTime[buffIndex] = 0; }
         }
+
 
 
 

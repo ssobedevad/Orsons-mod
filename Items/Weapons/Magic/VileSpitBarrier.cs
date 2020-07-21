@@ -16,11 +16,11 @@ namespace OrsonsMod.Items.Weapons.Magic
 
         public override void SetDefaults()
         {
-            item.damage = 14;
+            item.damage = 16;
             item.noMelee = true;
             item.magic = true;
             item.knockBack = 3f;
-            item.rare = ItemRarityID.Blue;
+            item.rare = ItemRarityID.Orange;
             item.width = 58;
             item.height = 26;
             item.useTime = 20;

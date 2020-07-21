@@ -36,7 +36,7 @@ namespace OrsonsMod.Items.Weapons.Summon.Whips
             item.knockBack = 2;
             item.shootSpeed = 8;
             item.rare = ItemRarityID.Blue;
-
+            item.value = 10000;
         }
 
 

@@ -22,8 +22,8 @@ namespace OrsonsMod.NPCs
             npc.lifeMax = 70;
             npc.aiStyle = 22;
             npc.knockBackResist = 0.5f;
-            npc.HitSound = SoundID.NPCHit6;
-            npc.DeathSound = SoundID.NPCDeath5;
+            npc.HitSound = SoundID.NPCHit54;
+            npc.DeathSound = SoundID.NPCDeath52;
 
             npc.noGravity = true;
             npc.noTileCollide = true;
@@ -64,8 +64,8 @@ namespace OrsonsMod.NPCs
                 alpha9.B = (byte)(alpha9.B * (10 - (2 * i)) / 20);
                 alpha9.A = (byte)(alpha9.A * (10 - (2 * i)) / 20);
                 spriteBatch.Draw(
-                    mod.GetTexture(Texture),
-                     vect, rect, alpha9, npc.rotation, new Vector2(npc.width / 2, npc.height / 2), 1f, SpriteEffects.None, 0f);
+                    ModContent.GetTexture(Texture),
+                     vect, rect, alpha9, npc.rotation, new Vector2(npc.width / 2, npc.height / 2), 1f, (npc.velocity.X > 0)? SpriteEffects.FlipHorizontally : SpriteEffects.None, 0f);
 
 
 
@@ -76,8 +76,8 @@ namespace OrsonsMod.NPCs
             Vector2 vect2 = new Vector2(npc.position.X + npc.width / 2 - Main.screenPosition.X, npc.position.Y + npc.height / 2 - Main.screenPosition.Y);
             Rectangle rect2 = npc.frame;
             spriteBatch.Draw(
-                    mod.GetTexture(Texture),
-                     vect2, rect2, Color.White, npc.rotation, new Vector2(npc.width / 2, npc.height / 2), 1f, SpriteEffects.None, 0f);
+                    ModContent.GetTexture(Texture),
+                     vect2, rect2, Color.White, npc.rotation, new Vector2(npc.width / 2, npc.height / 2), 1f, (npc.velocity.X > 0) ? SpriteEffects.FlipHorizontally : SpriteEffects.None, 0f);
             return false;
 
         }

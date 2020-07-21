@@ -34,7 +34,10 @@ namespace OrsonsMod.Tiles
 				case 0:
 					item = ItemType<DrPandemicTrophy>();
 					break;
-				
+				case 1:
+					item = mod.ItemType("FuriousFurnaceTrophy");
+					break;
+
 			}
 			if (item > 0)
 			{

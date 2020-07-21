@@ -29,7 +29,7 @@ namespace OrsonsMod.Projectiles.Friendly.Magic
             projectile.aiStyle = -1;
 
 
-            projectile.penetrate = 1;
+            projectile.penetrate = 2;
             projectile.tileCollide = false;
 
         }

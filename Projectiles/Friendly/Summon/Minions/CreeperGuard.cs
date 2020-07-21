@@ -69,7 +69,7 @@ namespace OrsonsMod.Projectiles.Friendly.Summon.Minions
             if (player.dead || !player.active)
             {
                 player.ClearBuff(mod.BuffType("CreeperBodyGuard"));
-                player.GetModPlayer<OrsonsPlayer>().guardMinion = false;
+               
             }
             if (player.HasBuff(mod.BuffType("CreeperBodyGuard")))
             {
@@ -129,8 +129,12 @@ namespace OrsonsMod.Projectiles.Friendly.Summon.Minions
 
 
         }
+        public override void Kill(int timeLeft)
+        {
+            Player player = Main.player[projectile.owner];
+            player.GetModPlayer<OrsonsPlayer>().guardMinion = false;
+        }
 
-        
         private float Mag(Vector2 mag)
         {
             return (float)Math.Sqrt(mag.X * mag.X + mag.Y * mag.Y);

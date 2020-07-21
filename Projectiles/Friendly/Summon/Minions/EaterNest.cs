@@ -20,7 +20,7 @@ namespace OrsonsMod.Projectiles.Friendly.Summon.Minions
 
         public override void SetStaticDefaults()
         { // Denotes that this projectile is a pet or minion
-            Main.projPet[projectile.type] = true;
+            //Main.projPet[projectile.type] = true;
 
             ProjectileID.Sets.MinionSacrificable[projectile.type] = true;
             // Don't mistake this with "if this is true, then it will automatically home". It is just for damage reduction for certain NPCs
@@ -46,19 +46,24 @@ namespace OrsonsMod.Projectiles.Friendly.Summon.Minions
 
 
         }
-        
+        public override bool OnTileCollide(Vector2 oldVelocity)
+        {
+            
+            return false;
+        }
         public override void AI()
         {
-            projectile.velocity.Y += 0.3f;
+            
             Player player = Main.player[projectile.owner];
+            
             if (player.dead || !player.active)
             {
                 player.ClearBuff(mod.BuffType("EaterNest"));
                 
             }
-            if (player.HasBuff(mod.BuffType("EaterNest")))
+            if (!player.HasBuff(mod.BuffType("EaterNest")))
             {
-                projectile.timeLeft = 2;
+                projectile.active = false;
                 
             }
             if (shootCD > 0) { shootCD -= 1; }

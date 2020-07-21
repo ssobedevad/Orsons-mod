@@ -25,7 +25,7 @@ namespace OrsonsMod.Items.Weapons.Thrown
             item.shootSpeed = 10f;
             item.useAnimation = 28;
             item.shoot = mod.ProjectileType("SlimyShuriken");
-            item.useAmmo = 1000;
+            item.useAmmo = ItemID.Shuriken;
             item.value = 20000;
             item.crit = 4;
         }

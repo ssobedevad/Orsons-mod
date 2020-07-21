@@ -17,6 +17,7 @@ using Terraria.ModLoader;
 
 namespace OrsonsMod.NPCs.Boss
 {
+    [AutoloadBossHead]
     public class DrPandemic : ModNPC
     {
 

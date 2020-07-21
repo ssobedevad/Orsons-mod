@@ -115,6 +115,12 @@ namespace OrsonsMod.Projectiles.Friendly.Summon.Minions
 
             
         }
+        public override void Kill(int timeLeft)
+        {
+            Player player = Main.player[projectile.owner];
+            player.GetModPlayer<OrsonsPlayer>().guardMinion = false;
+        }
+
         private void Target(Player player)
         {
             target = -1;
