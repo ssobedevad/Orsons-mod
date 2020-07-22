@@ -47,7 +47,7 @@ namespace OrsonsMod.Items.Weapons.PressureWeapons
 
 			if (boilerGunProj[0] > 0 && Main.time % 10 == 0)
 			{
-				Projectile.NewProjectile(new Vector2(boilerGunProj[1] + Main.rand.NextFloat(-2f, 2f), boilerGunProj[2] + Main.rand.NextFloat(-2f, 2f)), new Vector2(boilerGunProj[3]+Main.rand.NextFloat(-2f,2f), boilerGunProj[4] + Main.rand.NextFloat(-2f, 2f)), (int)boilerGunProj[5], (int)boilerGunProj[6], boilerGunProj[7], player.whoAmI);
+				Projectile.NewProjectile(new Vector2(boilerGunProj[1] + Main.rand.NextFloat(-2f, 2f), boilerGunProj[2] + Main.rand.NextFloat(-2f, 2f)), new Vector2(boilerGunProj[3]+Main.rand.NextFloat(-2f,2f), boilerGunProj[4] + Main.rand.NextFloat(-2f, 2f)), (int)boilerGunProj[5], (int)boilerGunProj[6], boilerGunProj[7], player.whoAmI,-1);
 				boilerGunProj[0] -= 1;
 
 			}

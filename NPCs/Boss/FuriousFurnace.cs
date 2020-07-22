@@ -23,9 +23,9 @@ namespace OrsonsMod.NPCs.Boss
     public class FuriousFurnace : ModNPC
     {
 
-        private const int grenadeDamage = 40;
+        private const int grenadeDamage = 20;
         
-        private const int rocketDamage = 45;
+        private const int rocketDamage = 22;
         
         public override void SetDefaults()
         {
@@ -39,9 +39,9 @@ namespace OrsonsMod.NPCs.Boss
             npc.aiStyle = -1;
             npc.damage = 30;
             npc.knockBackResist = 0f;
-            npc.HitSound = SoundID.NPCHit1;
-            npc.DeathSound = SoundID.NPCDeath5;
-            npc.behindTiles = true;
+            npc.HitSound = SoundID.NPCHit4;
+            npc.DeathSound = SoundID.NPCDeath14;
+            
             npc.noTileCollide = true;
             npc.boss = true;
             npc.buffImmune[BuffID.Poisoned] = true;
@@ -132,7 +132,9 @@ namespace OrsonsMod.NPCs.Boss
                 int projid2 = Projectile.NewProjectile(npc.Center + new Vector2(80, -70), new Vector2(4, -8), mod.ProjectileType("FurnaceRocket"), rocketDamage, 0f);
                 int projid3 = Projectile.NewProjectile(npc.Center + new Vector2(-40, -40), new Vector2(-2, -2), ProjectileID.BombSkeletronPrime, grenadeDamage, 0f);
                 int projid4 = Projectile.NewProjectile(npc.Center + new Vector2(40, -40), new Vector2(2, -2), ProjectileID.BombSkeletronPrime, grenadeDamage, 0f);
-                if(Main.expertMode)
+                Main.projectile[projid3].timeLeft = 60;
+                Main.projectile[projid4].timeLeft = 60;
+                if (Main.expertMode)
                 {
                     int expertProj = Projectile.NewProjectile(npc.Center + new Vector2(-30, -70), new Vector2(-4, -8), mod.ProjectileType("FurnaceRocket"), rocketDamage, 0f);
                     int expertProj2 = Projectile.NewProjectile(npc.Center + new Vector2(30, -70), new Vector2(4, -8), mod.ProjectileType("FurnaceRocket"), rocketDamage, 0f);

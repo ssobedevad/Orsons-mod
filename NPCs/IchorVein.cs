@@ -19,8 +19,11 @@ namespace OrsonsMod.NPCs
 			npc.aiStyle = -1;
 			Main.npcFrameCount[npc.type] = 5;
 			animationType = NPCID.Clinger;
+			banner = npc.type;
+			bannerItem = mod.ItemType("IchorVeinBanner");
+
 		}
-        public override void AI()
+		public override void AI()
         {
 			if(npc.ai[0] == 0) { int npcXTile = (int)(npc.Center.X / 16f)-5; int npcYTile = (int)(npc.Center.Y / 16f)-5; for (int i = 0; i < 10; i ++) { for (int j = 0; j < 10; j++) { if (Main.tile[npcXTile+i, npcYTile+j].active() && Main.tileSolid[Main.tile[npcXTile + i, npcYTile + j].type]) { npc.ai[0] = npcXTile + i; npc.ai[1] = npcYTile + j;break;  } } } }
 			if (npc.ai[0] < 0f || npc.ai[0] >= (float)Main.maxTilesX || npc.ai[1] < 0f || npc.ai[1] >= (float)Main.maxTilesX)

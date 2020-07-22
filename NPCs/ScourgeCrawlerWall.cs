@@ -35,8 +35,7 @@ namespace OrsonsMod.NPCs
             banner = mod.NPCType("ScourgeCrawler");
             bannerItem = mod.ItemType("ScourgeCrawlerBanner");
 
-            //banner = npc.type;
-            //bannerItem = mod.ItemType("IchorEssenceBanner");
+           
 
         }
         public override void AI()

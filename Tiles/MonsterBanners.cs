@@ -67,6 +67,9 @@ namespace OrsonsMod.Tiles
 				case 9:
 					item = "SnowyApparitionBanner";
 					break;
+				case 10:
+					item = "IchorVeinBanner";
+					break;
 				default:
 					return;
 			}
@@ -113,6 +116,9 @@ namespace OrsonsMod.Tiles
 						break;
 					case 9:
 						type = "SnowyApparition";
+						break;
+					case 10:
+						type = "IchorVein";
 						break;
 					default:
 						return;

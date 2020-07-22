@@ -38,7 +38,7 @@ namespace OrsonsMod.NPCs.Boss
             npc.knockBackResist = 0f;
             npc.HitSound = SoundID.NPCHit1;
             npc.DeathSound = SoundID.NPCDeath5;
-            npc.behindTiles = true;
+            
             npc.noTileCollide = true;
             npc.boss = true;
             npc.buffImmune[BuffID.Poisoned] = true;

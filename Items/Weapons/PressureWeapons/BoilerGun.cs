@@ -31,7 +31,7 @@ namespace OrsonsMod.Items.Weapons.PressureWeapons
 			item.rare = ItemRarityID.LightRed;
 			baseCrit = item.crit;
 			pressureCrit = 11;
-			item.UseSound = SoundID.Item1;
+			item.UseSound = SoundID.Item11;
 			item.autoReuse = false;
 			item.shootSpeed = 8;
 			baseShootspeed = item.shootSpeed;

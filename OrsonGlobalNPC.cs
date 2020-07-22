@@ -25,7 +25,7 @@ namespace OrsonsMod
         public override void NPCLoot(NPC npc)
         {
             // We check several things that filter out bosses and critters, as well as the depth that the npc died at. 
-            if (npc.Center.Y > Main.rockLayer && Main.rand.Next(0, 15) == 0 && Main.hardMode)
+            if (npc.Center.Y > Main.rockLayer && Main.rand.Next(0, 15) == 0 && Main.hardMode && npc.lifeMax > 5 && npc.damage > 0 && !npc.boss)
             {
                 Player ClosestPlayer = Main.player[Player.FindClosest(npc.position, npc.width, npc.height)];
                 if (ClosestPlayer.ZoneRockLayerHeight)

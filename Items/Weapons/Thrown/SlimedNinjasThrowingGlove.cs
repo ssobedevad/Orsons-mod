@@ -20,7 +20,7 @@ namespace OrsonsMod.Items.Weapons.Thrown
             item.rare = ItemRarityID.Blue;
 
             item.useTime = 28;
-            item.UseSound = SoundID.Item5;
+            item.UseSound = SoundID.Item7;
             item.useStyle = ItemUseStyleID.SwingThrow;
             item.shootSpeed = 10f;
             item.useAnimation = 28;
