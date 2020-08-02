@@ -18,7 +18,7 @@ namespace OrsonsMod.Walls
         }
         public override void ModifyLight(int i, int j, ref float r, ref float g, ref float b)
         {
-            Lighting.AddLight(new Vector2(i, j), new Vector3(1f, 1f, 1f));
+            Lighting.AddLight(new Vector2(i*16, j*16), new Vector3(1f, 1f, 1f));
         }
 
 

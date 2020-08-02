@@ -15,14 +15,19 @@ namespace OrsonsMod
             if (mi != null)
             {
                 PressureWeapon pw = mi as PressureWeapon;
-                if (pw != null && pw.pressure < 30 &&( projectile.type != mod.ProjectileType("SmokeSpray") || projectile.ai[0] != -1))
+                if (pw != null && pw.pressure < 30)
                 {
-                    if (pw.pressure == 29)
-                    { pw.pressure = 30; }
-                    else
+                    if (projectile.type != mod.ProjectileType("SmokeSpray") || (projectile.type == mod.ProjectileType("SmokeSpray") && projectile.ai[0] == 0))
                     {
-                        pw.pressure += 2;
+                      
+                        if (pw.pressure == 29)
+                        { pw.pressure = 30; }
+                        else
+                        {
+                            pw.pressure += 2;
+                        }
                     }
+                    
 
                 }
             }

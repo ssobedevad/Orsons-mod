@@ -12,7 +12,7 @@ namespace OrsonsMod.Projectiles.Friendly.Summon
 {
     public class RadiatorWhip : WhipClass
     {
-        private PressureWeapon pw;
+        
         private bool resetPressure = false;
         public override void SafeSetDefaults()
         {
@@ -23,37 +23,49 @@ namespace OrsonsMod.Projectiles.Friendly.Summon
         }
         public override void AIEffects(Player player)
         {
-            pw = Main.player[projectile.owner].HeldItem.modItem as PressureWeapon;
+            PressureWeapon pw = Main.player[projectile.owner].HeldItem.modItem as PressureWeapon;
             if (pw == null) { pw = Main.mouseItem.modItem as PressureWeapon; }
-            if (pw.pressure >= 30)
+            if (pw != null)
             {
-                summonTagDamage = 10;
+                if (pw.pressure >= 30)
+                {
+                    summonTagDamage = 10;
 
 
-                rangeMult = 0.8f;
-            }
-            else
-            {
-                summonTagDamage = 7;
+                    rangeMult = 0.8f;
+                }
+                else
+                {
+                    summonTagDamage = 7;
 
 
-                rangeMult = 0.6f;
+                    rangeMult = 0.6f;
+                }
             }
         }
         public override void NpcEffects(NPC target, int damage, float knockback, bool crit)
         {
             Player player = Main.player[projectile.owner];
-           
-            if(pw.pressure >= 30)
-            { Projectile.NewProjectile(target.Center, Vector2.Zero, ProjectileID.DD2ExplosiveTrapT3Explosion,damage, knockback, player.whoAmI); resetPressure = true; }
+            PressureWeapon pw = Main.player[projectile.owner].HeldItem.modItem as PressureWeapon;
+            if (pw == null) { pw = Main.mouseItem.modItem as PressureWeapon; }
+            if(pw != null)
+            {
+                if (pw.pressure >= 30)
+                { Projectile.NewProjectile(target.Center, Vector2.Zero, ProjectileID.DD2ExplosiveTrapT3Explosion, damage, knockback, player.whoAmI); resetPressure = true; }
+            }
 
         }
         public override void Kill(int timeLeft)
         {
-           if(resetPressure)
+            PressureWeapon pw = Main.player[projectile.owner].HeldItem.modItem as PressureWeapon;
+            if (pw == null) { pw = Main.mouseItem.modItem as PressureWeapon; }
+            if (pw != null)
             {
-               
-                pw.pressure = 0;
+                if (resetPressure)
+                {
+
+                    pw.pressure = 0;
+                }
             }
         }
 

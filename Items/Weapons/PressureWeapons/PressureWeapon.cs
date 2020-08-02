@@ -28,8 +28,10 @@ namespace OrsonsMod.Items.Weapons.PressureWeapons
         public int pressureManaCost = 0;
         public virtual void safeUpdateInv(Player player)
         { }
-        public override void UpdateInventory(Player player)
+        public override void HoldItem(Player player)
         {
+           
+
            
             item.damage = baseDamage;
             item.knockBack = baseKnockback;

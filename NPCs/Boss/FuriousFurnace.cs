@@ -132,8 +132,10 @@ namespace OrsonsMod.NPCs.Boss
                 int projid2 = Projectile.NewProjectile(npc.Center + new Vector2(80, -70), new Vector2(4, -8), mod.ProjectileType("FurnaceRocket"), rocketDamage, 0f);
                 int projid3 = Projectile.NewProjectile(npc.Center + new Vector2(-40, -40), new Vector2(-2, -2), ProjectileID.BombSkeletronPrime, grenadeDamage, 0f);
                 int projid4 = Projectile.NewProjectile(npc.Center + new Vector2(40, -40), new Vector2(2, -2), ProjectileID.BombSkeletronPrime, grenadeDamage, 0f);
-                Main.projectile[projid3].timeLeft = 60;
-                Main.projectile[projid4].timeLeft = 60;
+                Main.projectile[projid3].timeLeft = 40;
+                Main.projectile[projid4].timeLeft = 40;
+                Main.projectile[projid3].tileCollide = false;
+                Main.projectile[projid4].tileCollide = false;
                 if (Main.expertMode)
                 {
                     int expertProj = Projectile.NewProjectile(npc.Center + new Vector2(-30, -70), new Vector2(-4, -8), mod.ProjectileType("FurnaceRocket"), rocketDamage, 0f);
